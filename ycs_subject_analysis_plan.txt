@@ -1,0 +1,47 @@
+* 18th November 2016
+
+* YCS Subject Analysis Plan
+* Chris Playford
+
+Croxford, L., Iannelli, C., & Shapira, M. (2007). Documentation of the Youth Cohort Time-Series Datasets. In Centre for Educational Sociology (Ed.), UK Data Archive Study Number 5765 - Youth Cohort Time Series for England, Wales and Scotland, 1984-2002. Edinburgh: UK Data Archive.
+
+This dataset covers:
+
+SN 5765 - t0cohort - Year reached age 16 (E&W) or completed S4 stage (Scotland)
+
+1984 (from YCS1)
+1986 (from YCS3)
+1988 (from YCS4)
+1990 (from YCS5)
+1993 (from YCS7)
+1995 (from YCS8)
+1997 (from YCS9)
+1999 (from YCS10)
+
+***
+
+In addition:
+
+1992 (from YCS6) CJ Playford Harmonised YCS6 with SN 5765
+
+***
+
+Individual Cohort Data Files (including all raw variables)
+
+YCS1	SN 3093
+YCS2	SN 3094
+YCS3	SN 3012
+YCS4	SN 3107
+
+YCS5	SN 3531		Previously coded
+YCS6	SN 3532		Previously coded
+YCS7	SN 3533
+YCS8	SN 3805
+YCS9	SN 4009
+YCS10	SN 4751		Previously coded
+
+YCS11	SN 5452		Some prior work done (needs verifying)
+YCS12	SN 5830
+YCS13	SN 6024
+
+***
