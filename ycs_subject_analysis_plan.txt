@@ -45,3 +45,17 @@ YCS12	SN 5830
 YCS13	SN 6024
 
 ***
+
+For general information and future work:
+
+LSYPE1	SN 5545		First Longitudinal Study of Young People in England: Waves 1-7, 2004-2010
+	SN 7104 	First Longitudinal Study of Young People in England: Waves One to Seven, 2004-2010: Secure Access 
+
+
+LSYPE2	SN 7810 	Second Longitudinal Study of Young People in England: Wave 1, 2013
+	SN 7813 	Second Longitudinal Study of Young People in England: Wave 1, 2013: Safe Room Access
+	SN 7838 	Second Longitudinal Study of Young People in England: Wave 1, 2013: Secure Access
+
+UKHLS	SN 7642 	Understanding Society: Wave 1, 2009-2011: Linked National Pupil Database: Secure Access
+
+***
