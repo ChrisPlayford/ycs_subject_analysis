@@ -59,3 +59,11 @@ LSYPE2	SN 7810 	Second Longitudinal Study of Young People in England: Wave 1, 20
 UKHLS	SN 7642 	Understanding Society: Wave 1, 2009-2011: Linked National Pupil Database: Secure Access
 
 ***
+
+* 21st November 2016
+
+Actions:
+1) Download YCS1-YCS13
+2) Prepare YCS5-YCS10 first
+3) Then decide - either YCS1-4 (older but harmonised) or YCS11-13 (newer but not harmonised)
+
