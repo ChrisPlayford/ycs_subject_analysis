@@ -38,7 +38,7 @@ YCS6	SN 3532		Previously coded
 YCS7	SN 3533
 YCS8	SN 3805
 YCS9	SN 4009
-YCS10	SN 4751		Previously coded
+YCS10	SN 4571		Previously coded
 
 YCS11	SN 5452		Some prior work done (needs verifying)
 YCS12	SN 5830
