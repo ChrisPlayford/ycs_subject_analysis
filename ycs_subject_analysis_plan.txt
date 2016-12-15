@@ -67,3 +67,16 @@ Actions:
 2) Prepare YCS5-YCS10 first
 3) Then decide - either YCS1-4 (older but harmonised) or YCS11-13 (newer but not harmonised)
 
+***
+
+* 15th December 2016
+
+* YCS6 is mostly done
+* Need to go back to YCS6 and check t0examaf t0examac t0score with ew_core values
+* YCS6 t0examst is fine (based this on what learnt from YCS10)
+
+* YCS10 is missing the serial variable. Have emailed UKDS + Vernon + Roxanne
+* YCS10 do-file is about 50% complete.
+
+* Going to work on YCS5 next
+

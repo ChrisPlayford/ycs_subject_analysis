@@ -113,9 +113,11 @@ tab1 t0gcst*, mi
 
 egen t0examst = rowtotal(t0gcst*)
 label variable t0examst "Number of GCSEs studied for"
+mvdecode t0examst, mv(0)
+mvencode t0examst, mv(-9)
 tab t0examst, missing
 
-* I have left the 572 cases with 0 studied as 0 (not missing)
+* From comparison with other YCS cohorts, the 572 cases with 0 studied should be coded -9
 
 ***
 
