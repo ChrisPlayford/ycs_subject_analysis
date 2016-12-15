@@ -217,12 +217,11 @@ tab1 t0gcst*, mi
 
 * T0EXAMST - Variable counting number of exams studied for
 
-egen t0examst_test = rowtotal(t0gcst*)
+egen t0examst = rowtotal(t0gcst*)
 label variable t0examst "Number of GCSEs studied for"
-mvdecode t0examst_test, mv(0)
-mvencode t0examst_test, mv(-9)
-tab t0examst_test, missing
-drop t0examst_test
+mvdecode t0examst, mv(0)
+mvencode t0examst, mv(-9)
+tab t0examst, missing
 
 * Check against the harmonised file version
 
@@ -451,20 +450,26 @@ tab t0gcac2 t0gc2, mi
 
 * T0EXAMAF
 
-egen t0examaf = rowtotal(t0gcaf*)
+egen t0examaf = rowtotal(t0gcaf*), missing
 label variable t0examaf "num of A-F awards in Y11 or S4 exams"
+replace t0examaf=. if t0examst==-9
+mvencode t0examaf, mv(-9)
 tab t0examaf, missing
 
 * T0EXAMAC
 
-egen t0examac = rowtotal(t0gcac*)
+egen t0examac = rowtotal(t0gcac*), missing
 label variable t0examac "num of A-C awards in Y11 or S4 exams"
+replace t0examac=. if t0examst==-9
+mvencode t0examac, mv(-9)
 tab t0examac, missing
 
 * T0SCORE
 
-egen t0score = rowtotal(t0gcsc*)
+egen t0score = rowtotal(t0gcsc*), missing
 label variable t0score "point score from Y11 or S4 exams"
+replace t0score=. if t0examst==-9
+mvencode t0score, mv(-9)
 tab t0score, missing
 
 ***
@@ -476,7 +481,8 @@ tab t0examaf if t0cohort==1999, mi
 tab t0examac if t0cohort==1999, mi
 tab t0score if t0cohort==1999, mi
 
-* Not quite the same (-9 and 0 mostly)
+* Almost the same - there is one case that differs
+* Need 'missing' option on rowtotal.
 
 ***
 

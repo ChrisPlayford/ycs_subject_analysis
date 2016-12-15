@@ -1,88 +1,86 @@
-* 8th December 2016
+* 15th December 2016
 
 * Dr Chris Playford
 * Youth Cohort Study - Latent Class Analysis
 
-* YCS6 Preparation of raw GCSE subject information
+* YCS5 Preparation of raw GCSE subject information
 
-* The location of the folder containing the YCS wave 6 data
+* The location of the folder containing the YCS wave 5 data
 
-global path2 "A:\data\YCS_Cohort_6_Download\stata8\"
+global path5 "A:\data\YCS_Cohort_5_Download\stata8\"
+global path4 "A:\data\YCS_time_series\stata8\"
 
 clear
 set more off
-use $path2\cohort6.dta, clear
+use $path5\3531.dta, clear
 numlabel _all, add
 
-* YCS6 Data Dictionary
-* A:\data\YCS_Cohort_6_Download\mrdoc\allissue\cohort6_UKDA_Data_Dictionary.docx
+* YCS5 Data Dictionary
+* A:\data\YCS_Cohort_5_Download\mrdoc\allissue\3531_UKDA_Data_Dictionary.docx
 
-* YCS6 User Guide
-* A:\data\YCS_Cohort_6_Download\mrdoc\pdf\3532userguide.pdf
+* YCS5 User Guide
+* A:\data\YCS_Cohort_5_Download\mrdoc\pdf\3531userguide.pdf
 
 ***
 
 * T0EXAMST
 * Creating indicators for subjects studied for
 
-* Ten standard GCSE subjects (variables sw1v91-sw1v109)
+* Ten standard GCSE subjects (variables w1v032-w1v050)
 
-tab sw1v91, missing		/* 1 English (Language) */
-tab sw1v93, missing		/* 2 Maths */
-tab sw1v95, missing		/* 3 History */
-tab sw1v97, missing		/* 4 Geography */
-tab sw1v99, missing		/* 5 French */
-tab sw1v101, missing	/* 6 CDT */
-tab sw1v103, missing	/* 7 Biology */
-tab sw1v105, missing	/* 8 Physics */
-tab sw1v107, missing	/* 9 Chemistry */
-tab sw1v109, missing	/* 10 Combined Sciences 1 & 2 */
+tab w1v032, missing		/* 1 English (Language) */
+tab w1v034, missing		/* 2 Maths */
+tab w1v036, missing		/* 8 Physics */
+tab w1v038, missing		/* 9 Chemistry */
+tab w1v040, missing		/* 10 Combined Science */
+tab w1v042, missing		/* 7 Biology */
+tab w1v044, missing		/* 3 History */
+tab w1v046, missing		/* 4 Geography */
+tab w1v048, missing		/* 5 French */
+tab w1v050, missing		/* 6 CDT */
 
-* They have only recorded the variable once for the exam
-* They then record the exam results but they're different.
-* I have to retain the data (even with problems such as these). One exam but two results...
+* Four GCSEs in other subjects (variables w1v051-w1v062)
 
-* Seven GCSEs in other subjects (variables sw1v113-sw1v131)
+tab w1v053, missing		/* 11 Other GCSE subject 1 */
+tab w1v056, missing		/* 12 Other GCSE subject 2 */
+tab w1v059, missing		/* 13 Other GCSE subject 3 */
+tab w1v062, missing		/* 14 Other GCSE subject 4 */
 
-tab sw1v113, missing	/* 11 Other GCSE subject 1 */
-tab sw1v116, missing	/* 12 Other GCSE subject 2 */
-tab sw1v119, missing	/* 13 Other GCSE subject 3 */
-tab sw1v122, missing	/* 14 Other GCSE subject 4 */
-tab sw1v125, missing	/* 15 Other GCSE subject 5 */
-tab sw1v128, missing	/* 16 Other GCSE subject 6 */
+* Three other exams: GCSEs from transfer sheet P3Q1 (variables w1v259-w1v267) 
 
-* The label on sw1v131 is wrong in the data dictionary
-tab sw1v131, missing	/* 17 Other GCSE subject 7 */
+tab w1v259, missing		/* 15 Other GCSE subject 5 */
+tab w1v262, missing		/* 16 Other GCSE subject 6 */		
+tab w1v265, missing		/* 17 Other GCSE subject 7 */
 
 ***
 
 * Big loop to recode these and generate new variables
 
-tokenize "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17"
+tokenize "1 2 8 9 10 7 3 4 5 6 11 12 13 14 15 16 17"
 
-foreach x of var 	sw1v91 ///
-					sw1v93 ///
-					sw1v95 ///
-					sw1v97 ///
-					sw1v99 ///
-					sw1v101 ///
-					sw1v103 ///
-					sw1v105 ///
-					sw1v107 ///
-					sw1v109 ///
-					sw1v113 ///
-					sw1v116 ///
-					sw1v119 ///
-					sw1v122 ///
-					sw1v125 ///
-					sw1v128 ///
-					sw1v131 ///
+foreach x of var 	w1v032 ///
+					w1v034 ///
+					w1v036 ///
+					w1v038 ///
+					w1v040 ///
+					w1v042 ///
+					w1v044 ///
+					w1v046 ///
+					w1v048 ///
+					w1v050 ///
+					w1v053 ///
+					w1v056 ///
+					w1v059 ///
+					w1v062 ///
+					w1v259 ///
+					w1v262 ///
+					w1v265 ///
 {
 	recode `x' (1/2 = 1 "Studied") (9 = 0 "Did not study"), gen(t0gcst`1')
 	mac shift
 }
 
-* For useful info on this loop: http://www.stata.com/statalist/archive/2002-10/msg00374.html
+*
 
 label variable t0gcst1 "Studied GCSE English"
 label variable t0gcst2 "Studied GCSE Maths"
@@ -94,7 +92,7 @@ label variable t0gcst6 "Studied GCSE CDT"
 label variable t0gcst7 "Studied GCSE Biology"
 label variable t0gcst8 "Studied GCSE Physics"
 label variable t0gcst9 "Studied GCSE Chemistry"
-label variable t0gcst10 "Studied GCSE Combined Sciences 1 & 2"
+label variable t0gcst10 "Studied GCSE Combined Science"
 
 label variable t0gcst11 "Studied Other GCSE subject 1"
 label variable t0gcst12 "Studied Other GCSE subject 2"
@@ -109,6 +107,8 @@ label variable t0gcst17 "Studied Other GCSE subject 7"
 
 tab1 t0gcst*, mi
 
+***
+
 * T0EXAMST - Variable counting number of exams studied for
 
 egen t0examst = rowtotal(t0gcst*)
@@ -117,61 +117,66 @@ mvdecode t0examst, mv(0)
 mvencode t0examst, mv(-9)
 tab t0examst, missing
 
-* From comparison with other YCS cohorts, the 572 cases with 0 studied should be coded -9
+* Check against the harmonised file version
+
+* use $path4\ew_core.dta, clear
+* tab t0examst if t0cohort==1990, mi
+* Great - these are the same.
 
 ***
 
 * T0EXAMAF T0EXAMAC T0SCORE - GCSE Grade variables
 
-tab sw1v92, mi		/* 1 English */
-tab sw1v94, mi 		/* 2 Maths */
-tab sw1v96, mi		/* 3 History */
-tab sw1v98, mi		/* 4 Geography */
-tab sw1v100, mi		/* 5 French */
-tab sw1v102, mi		/* 6 CDT */
-tab sw1v104, mi 	/* 7 Biology */
-tab sw1v106, mi		/* 8 Physics */
-tab sw1v108, mi		/* 9 Chemistry */
-tab sw1v110, mi		/* 10 Combined Science 1 */
-tab sw1v111, mi		/* 11 Combined Science 2 */
+* Ten standard GCSE subjects (variables w1v033-w1v051)
 
-* The above is a bit of an anomaly re two science results but only 1 exam studied
+tab w1v033, missing		/* 1 English (Language) */
+tab w1v035, missing		/* 2 Maths */
+tab w1v037, missing		/* 8 Physics */
+tab w1v039, missing		/* 9 Chemistry */
+tab w1v041, missing		/* 10 Combined Science */
+tab w1v043, missing		/* 7 Biology */
+tab w1v045, missing		/* 3 History */
+tab w1v047, missing		/* 4 Geography */
+tab w1v049, missing		/* 5 French */
+tab w1v051, missing		/* 6 CDT */
 
-* GCSE Other Subjects 1-7 - GCSE Grade variables
+* Four GCSEs in other subjects (variables w1v054-w1v063)
 
-tab sw1v114, mi		/* 12 GCSE Other Subject 1 */
-tab sw1v117, mi		/* 13 GCSE Other Subject 2 */
-tab sw1v120, mi		/* 14 GCSE Other Subject 3 */
-tab sw1v123, mi		/* 15 GCSE Other Subject 4 */
-tab sw1v126, mi		/* 16 GCSE Other Subject 5 */
-tab sw1v129, mi		/* 17 GCSE Other Subject 6 */
-tab sw1v132, mi		/* 18 GCSE Other Subject 7 */
+tab w1v054, missing		/* 11 Other GCSE subject 1 */
+tab w1v057, missing		/* 12 Other GCSE subject 2 */
+tab w1v060, missing		/* 13 Other GCSE subject 3 */
+tab w1v063, missing		/* 14 Other GCSE subject 4 */
+
+* Three other exams: GCSEs from transfer sheet P3Q1 (variables w1v260-w1v266) 
+
+tab w1v260, missing		/* 15 Other GCSE subject 5 */
+tab w1v263, missing		/* 16 Other GCSE subject 6 */		
+tab w1v266, missing		/* 17 Other GCSE subject 7 */
 
 ***
 
 * Big Loop to construct GCSE Points Score Variable, A-F & A-C Indicators
 
-tokenize "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18"
+tokenize "1 2 8 9 10 7 3 4 5 6 12 13 14 15 16 17 18"
 
 set more off
-foreach x of var 	sw1v92  ///
-					sw1v94  ///
-					sw1v96  ///
-					sw1v98  ///
-					sw1v100 ///
-					sw1v102 ///
-					sw1v104 ///
-					sw1v106 ///
-					sw1v108 ///
-					sw1v110 ///
-					sw1v111 ///
-					sw1v114 ///
-					sw1v117 ///
-					sw1v120 ///
-					sw1v123 ///
-					sw1v126 ///
-					sw1v129 ///
-					sw1v132 ///
+foreach x of var 	w1v033  ///
+					w1v035  ///
+					w1v037  ///
+					w1v039  ///
+					w1v041 ///
+					w1v043 ///
+					w1v045 ///
+					w1v047 ///
+					w1v049 ///
+					w1v051 ///
+					w1v054 ///
+					w1v057 ///
+					w1v060 ///
+					w1v063 ///
+					w1v260 ///
+					w1v263 ///
+					w1v266 ///
 {
 	clonevar t0gcres_raw`1' = `x'
 	gen 	t0gcsc`1'=.									/* GCSE Points Score Variable */
@@ -213,9 +218,9 @@ label variable t0gcac6  "GCSE CDT A-C"
 label variable t0gcac7  "GCSE Biology A-C"
 label variable t0gcac8  "GCSE Physics A-C"
 label variable t0gcac9  "GCSE Chemistry A-C"
-label variable t0gcac10 "GCSE Combined Science 1 A-C"
+label variable t0gcac10 "GCSE Combined Science A-C"
 
-label variable t0gcac11 "GCSE Combined Science 2 A-C"
+* label variable t0gcac11 "GCSE Combined Science 2 A-C"
 label variable t0gcac12 "GCSE Other Subject 1 A-C"
 label variable t0gcac13 "GCSE Other Subject 2 A-C"
 label variable t0gcac14 "GCSE Other Subject 3 A-C"
@@ -237,9 +242,9 @@ label variable t0gc6  "GCSE CDT A-C"
 label variable t0gc7  "GCSE Biology A-C"
 label variable t0gc8  "GCSE Physics A-C"
 label variable t0gc9  "GCSE Chemistry A-C"
-label variable t0gc10 "GCSE Combined Science 1 A-C"
+label variable t0gc10 "GCSE Combined Science A-C"
 
-label variable t0gc11 "GCSE Combined Science 2 A-C"
+* label variable t0gc11 "GCSE Combined Science 2 A-C"
 label variable t0gc12 "GCSE Other Subject 1 A-C"
 label variable t0gc13 "GCSE Other Subject 2 A-C"
 label variable t0gc14 "GCSE Other Subject 3 A-C"
@@ -255,7 +260,7 @@ label define t0gc_ac ///
 
 label values 	 t0gc1  t0gc2  t0gc3  t0gc4  t0gc5 ///
 				 t0gc6  t0gc7  t0gc8  t0gc9 t0gc10 ///
-				t0gc11 t0gc12 t0gc13 t0gc14 t0gc15 ///
+				       t0gc12 t0gc13 t0gc14 t0gc15 ///
 				t0gc16 t0gc17 t0gc18 ///
 				t0gc_ac
 
@@ -271,9 +276,9 @@ label variable t0gcaf6  "GCSE CDT A-F"
 label variable t0gcaf7  "GCSE Biology A-F"
 label variable t0gcaf8  "GCSE Physics A-F"
 label variable t0gcaf9  "GCSE Chemistry A-F"
-label variable t0gcaf10 "GCSE Combined Science 1 A-F"
+label variable t0gcaf10 "GCSE Combined Science A-F"
 
-label variable t0gcaf11 "GCSE Combined Science 2 A-F"
+* label variable t0gcaf11 "GCSE Combined Science 2 A-F"
 label variable t0gcaf12 "GCSE Other Subject 1 A-F"
 label variable t0gcaf13 "GCSE Other Subject 2 A-F"
 label variable t0gcaf14 "GCSE Other Subject 3 A-F"
@@ -296,9 +301,9 @@ label variable t0gcsc6  "GCSE CDT Points Score"
 label variable t0gcsc7  "GCSE Biology Points Score"
 label variable t0gcsc8  "GCSE Physics Points Score"
 label variable t0gcsc9  "GCSE Chemistry Points Score"
-label variable t0gcsc10 "GCSE Combined Science 1 Points Score"
+label variable t0gcsc10 "GCSE Combined Science Points Score"
 
-label variable t0gcsc11 "GCSE Combined Science 2 Points Score"
+* label variable t0gcsc11 "GCSE Combined Science 2 Points Score"
 label variable t0gcsc12 "GCSE Other Subject 1 Points Score"
 label variable t0gcsc13 "GCSE Other Subject 2 Points Score"
 label variable t0gcsc14 "GCSE Other Subject 3 Points Score"
@@ -323,6 +328,7 @@ tab t0gcres_raw2 t0gcac2, mi
 
 tab t0gcac1 t0gc1, mi
 tab t0gcac2 t0gc2, mi
+
 
 ***
 
@@ -350,35 +356,45 @@ replace t0score=. if t0examst==-9
 mvencode t0score, mv(-9)
 tab t0score, missing
 
-* Have coded this in the same format as YCS5 (not using 'missing' option)
+* YCS10 appears to be coded using the 'missing' option on rowtotal
+*  YCS5 appears not to use this option...!
 
 ***
 
-* 9th December 2016
+* Check against the harmonised file version
+
+* use $path4\ew_core.dta, clear
+* tab t0examaf if t0cohort==1990, mi
+* tab t0examac if t0cohort==1990, mi
+* tab t0score if t0cohort==1990, mi
+
+***
 
 * The seven GCSEs in other subjects have variables indicating the subject taken
 * The User Guide has details of the codes used
 
-* 12 GCSE Other Subject 1 - sw1v112
-* 13 GCSE Other Subject 2 - sw1v115
-* 14 GCSE Other Subject 3 - sw1v118
-* 15 GCSE Other Subject 4 - sw1v121
-* 16 GCSE Other Subject 5 - sw1v124
-* 17 GCSE Other Subject 6 - sw1v127
-* 18 GCSE Other Subject 7 - sw1v130
+* 12 GCSE Other Subject 1 - w1v052
+* 13 GCSE Other Subject 2 - w1v055
+* 14 GCSE Other Subject 3 - w1v058
+* 15 GCSE Other Subject 4 - w1v061
+* 16 GCSE Other Subject 5 - w1v258
+* 17 GCSE Other Subject 6 - w1v261
+* 18 GCSE Other Subject 7 - w1v264
 
-codebook sw1v112 sw1v115 sw1v118 sw1v121 sw1v124 sw1v127 sw1v130, compact
+codebook w1v052 w1v055 w1v058 w1v061 w1v258 w1v261 w1v264, compact
+
+* This has the same coding scheme as YCS6
 
 * Big loop to classify the huge number of GCSE subjects into 18 categories 
 
 tokenize "12 13 14 15 16 17 18"
-foreach x of var 	sw1v112 ///
-					sw1v115 ///
-					sw1v118 ///
-					sw1v121 ///
-					sw1v124 ///
-					sw1v127 ///
-					sw1v130 ///
+foreach x of var 	w1v052 ///
+					w1v055 ///
+					w1v058 ///
+					w1v061 ///
+					w1v258 ///
+					w1v261 ///
+					w1v264 ///
 {
 	recode `x' ///
 	(1           = 10 "Combined Science 1") ///
@@ -415,9 +431,9 @@ label variable t0gc18sub "Other GCSE Subject 7"
 
 * Quality Assurance Check
 
-codebook sw1v112
-count if sw1v112==998 | sw1v112==999
-di 69 + 2670
+codebook w1v052
+count if w1v052==998 | w1v052==999
+di 26 + 1259
 numlabel _all, add
 tab t0gc12sub, missing 
 
@@ -437,11 +453,14 @@ tab t0gc6, mi	/* 6 CDT */
 tab t0gc7, mi	/* 7 Biology */
 tab t0gc8, mi	/* 8 Physics */
 tab t0gc9, mi	/* 9 Chemistry */
+tab t0gc10, mi	/* 10 Combined Science */
+
+* In YCS5, there is only one combined science grade provided (not double science)
 
 * This loop goes across all of these subjects and takes the maximum grade
 
 set more off
-forvalues j = 1(1)9 {
+forvalues j = 1(1)10 {
 	capture drop temp12-temp18
 	forvalues i = 12(1)18 {
 		gen temp`i' = t0gc`i' if t0gc`i'sub==`j'
@@ -487,61 +506,6 @@ t0gc2==2 | ///
 
 tab t0gc2_1 gc2math, missing
 drop gc2math
-
-***
-
-* 10 Combined Science is a bit different (two grades)
-
-tab1 t0gc10 t0gc11, mi
-
-capture drop temp12-temp18
-forvalues i = 12(1)18 {
-	gen temp`i' = t0gc`i' if t0gc`i'sub==10
-}
-
-egen t0gc10_1 = rowmax(t0gc10 t0gc11 temp12-temp18)
-drop temp12-temp18
-
-tab t0gc10_1, mi
-
-* Quality Assurance Check - Combined Science
-
-gen gc10sci=.
-replace gc10sci=0 if ///
-t0gc10==0 | ///
-t0gc11==0 | ///
-(t0gc12sub==10 & t0gc12==0) | ///
-(t0gc13sub==10 & t0gc13==0) | ///
-(t0gc14sub==10 & t0gc14==0) | ///
-(t0gc15sub==10 & t0gc15==0) | ///
-(t0gc16sub==10 & t0gc16==0) | ///
-(t0gc17sub==10 & t0gc17==0) | ///
-(t0gc18sub==10 & t0gc18==0)
-
-replace gc10sci=1 if ///
-t0gc10==1 | ///
-t0gc11==1 | ///
-(t0gc12sub==10 & t0gc12==1) | ///
-(t0gc13sub==10 & t0gc13==1) | ///
-(t0gc14sub==10 & t0gc14==1) | ///
-(t0gc15sub==10 & t0gc15==1) | ///
-(t0gc16sub==10 & t0gc16==1) | ///
-(t0gc17sub==10 & t0gc17==1) | ///
-(t0gc18sub==10 & t0gc18==1)
-
-replace gc10sci=2 if ///
-t0gc10==2 | ///
-t0gc11==2 | ///
-(t0gc12sub==10 & t0gc12==2) | ///
-(t0gc13sub==10 & t0gc13==2) | ///
-(t0gc14sub==10 & t0gc14==2) | ///
-(t0gc15sub==10 & t0gc15==2) | ///
-(t0gc16sub==10 & t0gc16==2) | ///
-(t0gc17sub==10 & t0gc17==2) | ///
-(t0gc18sub==10 & t0gc18==2)
-
-tab t0gc10_1 gc10sci, mi
-drop gc10sci
 
 ***
 
@@ -649,15 +613,20 @@ label variable t0gc18other 	"GCSE Other Subject Grade (highest)"
 
 tab1 t0gc1eng t0gc2math t0gc3his, mi
 
+* Potentially rename t0gc10sci as "GCSE Science Grade (highest)"
+
 ***
 
 * Rename the identifying variables
 
-rename id t0caseid
-gen t0cohort=1992
+rename caseno t0caseid
+gen t0cohort=1990
 label variable t0cohort "year completed compulsory schooling"
 
-drop sw*
+drop w*
+drop cardno*
+keep t0*
+
 order *, sequential
 order t0cohort t0caseid t0examst t0examaf t0examac t0score
 sort t0cohort t0caseid
@@ -667,7 +636,7 @@ codebook, compact
 * Save the subjects dataset
 
 global path3 "A:\YCS\github_ycs_subject_analysis\data\"
-save $path3\ycs6_gsce_subjects.dta, replace
+save $path3\ycs5_gsce_subjects.dta, replace
 
 clear
 
