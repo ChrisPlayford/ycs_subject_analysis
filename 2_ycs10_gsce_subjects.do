@@ -311,6 +311,7 @@ foreach x of var 	a11_1c  ///
 * I have deliberately kept the U grade in the analysis.
 
 ***
+
 * Label variables
 
 label variable t0gcac1_1  "GCSE English Lang A-C"

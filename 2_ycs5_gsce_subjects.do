@@ -407,7 +407,7 @@ foreach x of var 	w1v052 ///
 	(38/45 56/59 = 13 "Other humanity") ///
 	(46/48       =  1 "English") ///
 	(49          =  5 "French") ///
-	(50/55       =  4 "Other languages") ///
+	(50/55       = 14 "Other languages") ///
 	(60/61       =  3 "History") ///
 	(62/63       = 15 "RE") ///
 	(64/70       = 16 "Arts") ///
