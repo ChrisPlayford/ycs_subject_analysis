@@ -5,19 +5,28 @@
 
 * YCS10 Preparation of raw GCSE subject information
 
-* The location of the folder containing the YCS wave 6 data
+* The location of the folder containing the YCS wave 10 data
 
-* global path3 "A:\data\YCS_Cohort_10_Download\stata8_se\"
+ global path5 "A:\data\YCS_Cohort_5_Download\stata8\"
+ global path6 "A:\data\YCS_Cohort_6_Download\stata8\"
+ global path7 "A:\data\YCS_Cohort_7_Download\stata8\"
+ global path8 "A:\data\YCS_Cohort_8_Download\stata8\"
+ global path9 "A:\data\YCS_Cohort_9_Download\stata8\"
+* global path10 "A:\data\YCS_Cohort_10_Download\stata8_se\"
+global path11 "A:\data\YCS_Cohort_11_Download\stata8_se\"
+global path12 "A:\data\YCS_Cohort_12_Download\stata8\"
+global path13 "A:\data\YCS_Cohort_13_Download\stata9\"
+
+ global path3 "A:\YCS\github_ycs_subject_analysis\data\"
+ global path4 "A:\data\YCS_time_series\stata8\"
 
 * Moved file to temporary location because network connection too slow
-
-global path3 "C:\Users\cplayfor\Documents\temp\"
-global path4 "A:\data\YCS_time_series\stata8\"
+global path10 "C:\Users\cplayfor\Documents\temp\"
 
 clear
 set more off
 
-use $path3\ycs10final.dta, clear
+use $path10\ycs10final.dta, clear
 numlabel _all, add
 
 * YCS10 Data Dictionary
@@ -395,7 +404,7 @@ tab t0score if t0cohort==1999, mi
 * Investigating the absence of serial numbers from YCS10
 
 /*
-use $path3\ycs10final.dta, clear
+use $path10\ycs10final.dta, clear
 lookfor serial
 lookfor case
 lookfor sn
