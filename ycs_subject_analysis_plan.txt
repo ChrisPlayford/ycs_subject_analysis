@@ -80,3 +80,30 @@ Actions:
 
 * Going to work on YCS5 next
 
+***
+
+* 19th December 2016
+
+* Have emailed NatCen about the missing serial number on YCS10
+* Investigated a multi-variable match but cannot get unique combination yet
+
+* Corrected an error in coding subjects (mistakenly coded some subjects as 4 Geography, should be 14 Other Languages).
+
+* YCS 5-9 complete but would like to do some more checking.
+* Need to set up the common file paths in the files to make things tidier.
+
+
+Further investigations of the SN5765 User Guide suggest that it is not worth analysing prior to YCS5 because of lack of detailed information on parental occupation:
+
+p.50 "Detailed code describing father’s/mother’s occupation, using 1991 SOC6. SOC is not available for E& W cohorts prior to 1990."
+
+     "Parents’ occupation in YCS1 was not coded in sufficient detail to allow recoding to SOC. Parents’ occupation was not asked at YCS3 sweep1."
+
+p.51 "It has not been possible to derive SEC for E&W cohorts in 1984-1988 which did not have detailed occupation coding."
+
+
+In addition, information on whether parents had A-levels or a degree was not present before 1990.
+
+***
+
+
