@@ -180,11 +180,11 @@ label variable t0gcst18_1  "Studied GCSE Other GCSE Subject"
 * There is no summary variable - just a series of subjects studied for.
 
 codebook 	a11oga1 ///			/* 11 Other GCSE subject 1 */
-			a11oga2 ///			/* 11 Other GCSE subject 2 */
-			a11oga3 ///			/* 11 Other GCSE subject 3 */
-			a11oga4 ///			/* 11 Other GCSE subject 4 */
-			a11oga5 ///			/* 11 Other GCSE subject 5 */
-			a11oga6, compact	/* 11 Other GCSE subject 6 */
+			a11oga2 ///			/* 12 Other GCSE subject 2 */
+			a11oga3 ///			/* 13 Other GCSE subject 3 */
+			a11oga4 ///			/* 14 Other GCSE subject 4 */
+			a11oga5 ///			/* 15 Other GCSE subject 5 */
+			a11oga6, compact	/* 16 Other GCSE subject 6 */
 
 tab	a11oga1, mi	
 
