@@ -456,15 +456,15 @@ tab t0score, missing
 * The nine GCSEs in other subjects have variables indicating the subject taken
 * The User Guide has details of the codes used
 
-codebook 	a11oga1 ///			/* 11 Other GCSE subject 1 */
-			a11oga2 ///			/* 12 Other GCSE subject 2 */
-			a11oga3 ///			/* 13 Other GCSE subject 3 */
-			a11oga4 ///			/* 14 Other GCSE subject 4 */
-			a11oga5 ///			/* 15 Other GCSE subject 5 */
-			a11oga6 ///			/* 16 Other GCSE subject 6 */
-			a11oga7 ///			/* 17 Other GCSE subject 7 */
-			a11oga8 ///			/* 18 Other GCSE subject 8 */
-			a11oga9, compact	/* 19 Other GCSE subject 9 */
+codebook 	a11oga1 ///			/* 12 Other GCSE subject 1 */
+			a11oga2 ///			/* 13 Other GCSE subject 2 */
+			a11oga3 ///			/* 14 Other GCSE subject 3 */
+			a11oga4 ///			/* 15 Other GCSE subject 4 */
+			a11oga5 ///			/* 16 Other GCSE subject 5 */
+			a11oga6 ///			/* 17 Other GCSE subject 6 */
+			a11oga7 ///			/* 18 Other GCSE subject 7 */
+			a11oga8 ///			/* 19 Other GCSE subject 8 */
+			a11oga9, compact	/* 20 Other GCSE subject 9 */
 			
 * These codes are different to previous YCS cohorts. See User Guide.
 
@@ -596,7 +596,6 @@ drop gc1eng
 
 ***
 
-
 * 10 Combined Science is also a bit different (two grades)
 
 tab1 t0gc10 t0gc11, mi
@@ -718,7 +717,7 @@ drop gc2math
 
 ***
 
-* In YCS8, Biology, Chemistry and Physics are not standard subjects.
+* In YCS9, Biology, Chemistry and Physics are not standard subjects.
 * They need to be treated the same as the additional subjects (non-standard)
 * There are no "main" variables recording these
 * All the information is from the 8 extra GCSE variables
