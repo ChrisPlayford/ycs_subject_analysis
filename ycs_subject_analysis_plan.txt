@@ -89,8 +89,6 @@ Actions:
 
 * Corrected an error in coding subjects (mistakenly coded some subjects as 4 Geography, should be 14 Other Languages).
 
-
-
 * YCS 5-9 complete but would like to do some more checking.
 * Need to set up the common file paths in the files to make things tidier.
 
@@ -116,4 +114,11 @@ YCS12 & YCS13 Lack of variables explanation - Information on lack of GCSE subjec
 
 See 'ycs12_ycs13_no_subject_info_20161220_cp_v1.docx'
 
-***
+* Afternoon of 20th December
+
+Went through some code harmonising YCS10 and YCS11 with SN5765
+Wrote some new code checking my YCS10 codings with SN5765
+
+Mostly pretty consistent but some issues around SOC90 and SOC2000. Croxford et al. have done quite a bit of work converting between these.
+YCS10 appears to have SOC2000 information but the codes have been removed from the variable. Very annoying.
+It would be a lot easier if the serial number was available...
