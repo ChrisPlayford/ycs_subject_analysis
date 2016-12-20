@@ -89,6 +89,8 @@ Actions:
 
 * Corrected an error in coding subjects (mistakenly coded some subjects as 4 Geography, should be 14 Other Languages).
 
+
+
 * YCS 5-9 complete but would like to do some more checking.
 * Need to set up the common file paths in the files to make things tidier.
 
@@ -106,4 +108,12 @@ In addition, information on whether parents had A-levels or a degree was not pre
 
 ***
 
+20th December 2016
 
+* Added YCS11
+
+YCS12 & YCS13 Lack of variables explanation - Information on lack of GCSE subject variables in YCS12 and YCS13.
+
+See 'ycs12_ycs13_no_subject_info_20161220_cp_v1.docx'
+
+***
