@@ -122,3 +122,63 @@ Wrote some new code checking my YCS10 codings with SN5765
 Mostly pretty consistent but some issues around SOC90 and SOC2000. Croxford et al. have done quite a bit of work converting between these.
 YCS10 appears to have SOC2000 information but the codes have been removed from the variable. Very annoying.
 It would be a lot easier if the serial number was available...
+
+***
+
+21st December 2016
+
+Planning the next steps:
+
+* 3_ycs6_background_vars.do 	- This file harmonises YCS6 with ew_core.dta (SN5765). It has previously been checked through harmonisation work done using YCS5 (for verification).
+
+* 3_ycs10_background_vars.do 	- I use 3_ycs10_background_vars_check.do to check this
+				- I need to go through this again. It is mostly OK, a few missing/-9 codes to change to harmonise with ew_core.dta (SN5765)
+				- I will need to either translate SOC2000 codes into SOC90 or go straight from SOC2000 to NS-SEC.
+
+* 3_ycs11_background_vars.do	- This will need minor modifications based on the checking exercise and SOC2000 work done in 3_ycs10_background_vars.do
+
+**
+
+* The following files need looking over for consistency of variable position (i.e. varying number of standard subjects and additional subjects). I would like it to be consistent.
+
+*  2_ycs5_gsce_subjects
+*  2_ycs6_gsce_subjects
+*  2_ycs7_gsce_subjects
+*  2_ycs8_gsce_subjects
+*  2_ycs9_gsce_subjects
+* 2_ycs10_gsce_subjects
+* 2_ycs11_gsce_subjects
+
+**
+
+* Merging plan
+
+* Create ID variable for subjects datasets 	- Croxford et al. 'Note: the full key for linkage is t0cohort, t0nation, t0caseid'
+						- We don't link to Scottish data so t0cohort, t0caseid should be sufficient
+
+* Prepare ew_core.dta				- Drop pre-1990s data
+						- Drop YCS10 from records (because of lack of serial number)
+						- keep only variables of interest
+
+* Merge subjects datasets to prepared ew_core.dta for YCS5-9 using t0cohort & t0caseid
+
+* Create ID variable for YCS10 based on _n in dataset.
+* Merge YCS10 background variables with subject dataset.
+* Append this to prepared ew_core.dta
+
+* Merge YCS11 background variables with subject dataset.
+* Append this to prepared ew_core.dta
+
+* Download appropriate files for SOC90/SOC2000 lookup from CAMSIS website (depending on decision made during previous preparation).
+
+* Use t0dadsoc and t0mumsoc variables + employmen statuses in extended ew_core.data to produce parental stratification measures by merging with CAMSIS website lookups.
+
+* The extended ew_core.dta file should now have subject and background information for YCS5-11.
+
+* Revisit the plan at this point. 
+* The steps after this relate to preparing the explanatory variables for model fitting.
+* Then fit some latent class models.
+
+***
+
+* END *
