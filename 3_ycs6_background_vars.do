@@ -17,6 +17,7 @@ global path11 "A:\data\YCS_Cohort_11_Download\stata8_se\"
 global path12 "A:\data\YCS_Cohort_12_Download\stata8\"
 global path13 "A:\data\YCS_Cohort_13_Download\stata9\"
 
+ global path2 "A:\YCS\github_ycs_subject_analysis\"
  global path3 "A:\YCS\github_ycs_subject_analysis\data\"
  global path4 "A:\data\YCS_time_series\stata8\"
 
@@ -461,7 +462,7 @@ tab t0region, missing
 
 ***
 
-* Bit more complex poss: 3 digit codes?
+* SOC90 codes
 
 ** 30) t0dadsoc=sw1v398
 ** 31) t0mumsoc=sw1v400
@@ -471,6 +472,8 @@ describe sw1v398
 gen t0dadsoc=sw1v398
 gen t0mumsoc=sw1v400
 
+label variable t0dadsoc "SOC90 code of fathers’ occupation"
+label variable t0mumsoc "SOC90 code of mothers’ occupation"
 
 ** SUBJECTS AND EXAMS DIFFERENT FILE
 

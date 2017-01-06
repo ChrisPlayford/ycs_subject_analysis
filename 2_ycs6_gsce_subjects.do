@@ -17,6 +17,7 @@ global path11 "A:\data\YCS_Cohort_11_Download\stata8_se\"
 global path12 "A:\data\YCS_Cohort_12_Download\stata8\"
 global path13 "A:\data\YCS_Cohort_13_Download\stata9\"
 
+ global path2 "A:\YCS\github_ycs_subject_analysis\"
  global path3 "A:\YCS\github_ycs_subject_analysis\data\"
  global path4 "A:\data\YCS_time_series\stata8\"
 

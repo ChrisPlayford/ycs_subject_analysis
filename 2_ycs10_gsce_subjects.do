@@ -17,6 +17,7 @@ global path11 "A:\data\YCS_Cohort_11_Download\stata8_se\"
 global path12 "A:\data\YCS_Cohort_12_Download\stata8\"
 global path13 "A:\data\YCS_Cohort_13_Download\stata9\"
 
+ global path2 "A:\YCS\github_ycs_subject_analysis\"
  global path3 "A:\YCS\github_ycs_subject_analysis\data\"
  global path4 "A:\data\YCS_time_series\stata8\"
 
@@ -805,13 +806,26 @@ tab1 t0gc7bio t0gc8phy t0gc9che, mi
 
 * Rename the identifying variables
 
-* rename serial t0caseid /* THIS NEEDS TO BE ADDRESSED - NO SERIAL... */
+* t0caseid - This is missing from SN4571
+
+gen t0caseid = .
+label variable t0caseid "id for time series"
+codebook t0caseid
+
+* New ID variable created based on order in dataset (ycs10_id)
+
+* There has been no prior sorting of the dataset, so this is OK for linking to 'ycs10_background_vars.dta'
+
+gen ycs10_id = _n
+label variable ycs10_id "ID variable created - based on position in YCS10"
+codebook ycs10_id
+
 gen t0cohort=1999
 label variable t0cohort "year completed compulsory schooling"
 
-keep t0*
+keep t0* ycs10_id
 order *, sequential
-order t0cohort t0examst t0examaf t0examac t0score
+order  t0cohort t0caseid ycs10_id t0examst t0examaf t0examac t0score
 * sort t0cohort t0caseid
 
 codebook, compact

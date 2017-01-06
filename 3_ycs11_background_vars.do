@@ -17,6 +17,7 @@ global path10 "A:\data\YCS_Cohort_10_Download\stata8_se\"
 global path12 "A:\data\YCS_Cohort_12_Download\stata8\"
 global path13 "A:\data\YCS_Cohort_13_Download\stata9\"
 
+ global path2 "A:\YCS\github_ycs_subject_analysis\"
  global path3 "A:\YCS\github_ycs_subject_analysis\data\"
  global path4 "A:\data\YCS_time_series\stata8\"
 
@@ -354,11 +355,16 @@ tab t0region s1gor, missing
 * 30) t0dadsoc=ns1socf
 * 31) t0mumsoc=ns1socm
 
-* tab1 ns1socf ns1socm, missing
-gen t0dadsoc=soc2
-gen t0mumsoc=soc3
+gen t0dadsoc2000=soc2
+gen t0mumsoc2000=soc3
 
 mvdecode t0dadsoc t0mumsoc, mv(-9)
+
+do $path2\3_soc2000_labels.do"
+
+label values t0dadsoc2000 t0mumsoc2000 soc2000
+label variable t0dadsoc2000 "SOC2000 code of fathers’ occupation"
+label variable t0mumsoc2000 "SOC2000 code of mothers’ occupation"
 
 codebook t0dadsoc t0mumsoc
 
@@ -407,6 +413,11 @@ tab1 nssec1 nssec2, missing
 
 tab1 s1nssecf s1nssecm, mi
 
+clonevar ycs11_t0dad_nssec = s1nssecf
+clonevar ycs11_t0mum_nssec = s1nssecm
+
+codebook t0dadsoc t0mumsoc
+
 * Use the above to create semi-dominance measure
 
 * Skipping 50 - 66 (not used in analysis)
@@ -415,8 +426,8 @@ tab1 s1nssecf s1nssecm, mi
 
 * Harmonised variables file
 
-keep t0* s1nssecf s1nssecm
-order s1nssecf s1nssecm, last
+keep t0* ycs11_t0dad_nssec ycs11_t0mum_nssec
+order ycs11_t0dad_nssec ycs11_t0mum_nssec, last
 
 global path3 "A:\YCS\github_ycs_subject_analysis\data\"
 save $path3\ycs11_background_vars.dta, replace

@@ -17,6 +17,7 @@ global path11 "A:\data\YCS_Cohort_11_Download\stata8_se\"
 global path12 "A:\data\YCS_Cohort_12_Download\stata8\"
 global path13 "A:\data\YCS_Cohort_13_Download\stata9\"
 
+ global path2 "A:\YCS\github_ycs_subject_analysis\"
  global path3 "A:\YCS\github_ycs_subject_analysis\data\"
  global path4 "A:\data\YCS_time_series\stata8\"
 
@@ -153,6 +154,12 @@ tab t0nation
 gen t0caseid = .
 label variable t0caseid "id for time series"
 codebook t0caseid
+
+* New ID variable created based on order in dataset (ycs10_id)
+
+gen ycs10_id = _n
+label variable ycs10_id "ID variable created - based on position in YCS10"
+codebook ycs10_id
 
 * 4) t0source = ycs10
 
@@ -477,9 +484,23 @@ tab t0region s1gor, missing
 * 31) t0mumsoc=ns1socm
 
 * tab1 ns1socf ns1socm, missing
-gen t0dadsoc=ns1socf				/* SOC2000 Occupations - but without the code! */
-gen t0mumsoc=ns1socm				/* SOC2000 Occupations - but without the code! */
-* tab1 ns1socf ns1socm, missing
+* t0dadsoc		ns1socf		/* SOC2000 Occupations - but without the code! */
+* t0mumsoc		ns1socm		/* SOC2000 Occupations - but without the code! */
+
+do $path2\3_ycs10_soc2000_recode.do"
+do $path2\3_soc2000_labels.do"
+
+label values t0dadsoc2000 t0mumsoc2000 soc2000
+label variable t0dadsoc2000 "SOC2000 code of fathers’ occupation"
+label variable t0mumsoc2000 "SOC2000 code of mothers’ occupation"
+
+codebook t0dadsoc2000 t0mumsoc2000
+
+set more off
+numlabel _all, add
+tab1 t0dadsoc2000 t0mumsoc2000, mi
+
+* tab ns1socf ns1socm, mi
 
 * 32 - 39 are qualifications. Will return to later
 
@@ -545,7 +566,8 @@ tab t0gor, missing
 
 * Harmonised variables file
 
-keep t*
+keep ycs10_id t*
+order ycs10_id
 
 global path3 "A:\YCS\github_ycs_subject_analysis\data\"
 save $path3\ycs10_background_vars.dta, replace

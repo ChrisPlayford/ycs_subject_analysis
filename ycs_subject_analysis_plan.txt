@@ -181,4 +181,18 @@ Planning the next steps:
 
 ***
 
+6th January 2017
+
+Quite a lot of minor changes this morning and yesterday afternoon
+
+- Recoded the SOC2000 information with the appropriate codes for YCS10
+- Created a new ID variable for YCS10 datasets (background_vars and gcse_subjects) to enable merging
+- Added some extra file paths
+- Checked through YCS10 and YCS11 background variables
+- Created a couple of files inspecting the contents of the datasets by creating an Excel spreadsheet
+	- '4_inspection_background_vars_datasets.do'
+	- '4_inspection_gcse_subjects_datasets.do'
+
+***
+
 * END *

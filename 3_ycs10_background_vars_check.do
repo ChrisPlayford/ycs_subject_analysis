@@ -21,6 +21,7 @@ global path11 "A:\data\YCS_Cohort_11_Download\stata8_se\"
 global path12 "A:\data\YCS_Cohort_12_Download\stata8\"
 global path13 "A:\data\YCS_Cohort_13_Download\stata9\"
 
+ global path2 "A:\YCS\github_ycs_subject_analysis\"
  global path3 "A:\YCS\github_ycs_subject_analysis\data\"
  global path4 "A:\data\YCS_time_series\stata8\"
 
@@ -69,7 +70,9 @@ keep if t0cohort==1999
 codebook t0caseid
 restore
 
-* Obviously, given the problem, these are different.
+* New ID variable created for linkage 
+
+codebook ycs10_id
 
 * 4) t0source = ycs10
 
@@ -107,7 +110,8 @@ keep if t0cohort==1999
 tab t0schtyp, mi
 restore
 
-* These differ but I don't understand why. My coding makes sense.
+* These differ but I don't understand why. 
+* I don't see extra information that could inform my coding any differently.
 
 * 12) t0sex=s1sex
 
@@ -304,19 +308,24 @@ tab t0region, missing
 restore
 
 * Some differences but unlikely to use in analysis.
+* I have no extra information that would suggest why this is the case.
+* Looks like East Anglia and the South East are a bit different
 
 * 30) t0dadsoc=ns1socf
 * 31) t0mumsoc=ns1socm
 
-codebook t0dadsoc t0mumsoc, compact
+codebook t0dadsoc2000 t0mumsoc2000, compact
 
 preserve
 use $path4\ew_core.dta, clear
 keep if t0cohort==1999
 codebook t0dadsoc t0mumsoc, compact
+count if t0dadsoc==-9
+count if t0dadsoc==999
 restore
 
-* THESE ARE DIFFERENT...
+* SOC2000 is available in SN4571. 
+* Croxford et al. must have derived SOC90 via another method in SN5765.
 
 * 32 - 39 are qualifications.
 
@@ -355,12 +364,14 @@ numlabel t0gor, add
 tab t0gor, missing
 restore
 
-* NEED TO REVISIT THIS...
+* Looks like East Anglia and the South East are a bit different
+* Not sure how to differentiate these - no extra information available.
 
 * Skipping 46 - 48 (not used in analysis)
 
 * 49) t0parsec
 
+/*
 tab t0parsec, missing
 
 preserve
@@ -369,8 +380,12 @@ keep if t0cohort==1999
 numlabel t0parsec, add
 tab t0parsec, missing
 restore
+*/
 
 * THESE ARE COMPLETELY DIFFERENT... NOT THE SAME VARIABLE CONSTRUCTION.
 
 * Skipping 50 - 66 (not used in analysis)
 
+clear
+
+* END *
