@@ -5,7 +5,7 @@
 
 * YCS6 Preparation of respondent background information
 
-* The location of the folder containing the YCS wave 6 data
+* The location of the folder containing the YCS cohort 6 data
 
  global path5 "A:\data\YCS_Cohort_5_Download\stata8\"
  global path6 "A:\data\YCS_Cohort_6_Download\stata8\"
@@ -55,7 +55,6 @@ tab t0nation
 clonevar t0caseid=id
 summarize t0caseid
 codebook t0caseid
-help label
 label variable t0caseid "id for time series"
 codebook t0caseid
 
@@ -927,10 +926,42 @@ duplicates report t0caseid
 drop sw*
 drop id
 
+* A subset of variables has been retained which is common to YCS6, YCS10 and YCS11.
+
+keep 	t0cohort ///
+		t0nation ///
+		t0caseid ///
+		t0source ///
+		t1weight ///
+		t2weight ///
+		t3weight ///
+		t0schtyp ///
+		t0sex ///
+		t0stay ///
+		t0ethnic ///
+		t0house ///
+		t0dadpce ///
+		t0mumpce ///
+		t0dadalv ///
+		t0mumalv ///
+		t0daddeg ///
+		t0mumdeg ///
+		t0dadjob ///
+		t0mumjob ///
+		t0truant ///
+		t1att1 ///
+		t1att2 ///
+		t1att3 ///
+		t0region ///
+		t0dadsoc ///
+		t0mumsoc ///
+		t0dadse ///
+		t0mumse ///
+		t0gor
+
 global path3 "A:\YCS\github_ycs_subject_analysis\data\"
 save $path3\ycs6_background_vars.dta, replace
 
 clear
 
 * END * 
-

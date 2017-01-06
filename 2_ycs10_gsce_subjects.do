@@ -5,7 +5,7 @@
 
 * YCS10 Preparation of raw GCSE subject information
 
-* The location of the folder containing the YCS wave 10 data
+* The location of the folder containing the YCS cohort 10 data
 
  global path5 "A:\data\YCS_Cohort_5_Download\stata8\"
  global path6 "A:\data\YCS_Cohort_6_Download\stata8\"

@@ -193,6 +193,10 @@ Quite a lot of minor changes this morning and yesterday afternoon
 	- '4_inspection_background_vars_datasets.do'
 	- '4_inspection_gcse_subjects_datasets.do'
 
+This afternoon I have worked on checking for consistency, appending and merging the datasets. Some minor labelling errors have been corrected.
+
+On Monday I need to go back and sort out the issue with integer raw variables (see end of '4_ycs5_11_append_merge.do') using the decode command. 
+
 ***
 
 * END *

@@ -22,6 +22,8 @@ global path13 "A:\data\YCS_Cohort_13_Download\stata9\"
 ***
 
 * Creating an Excel spreadsheet of the variables and variable labels
+
+capture erase "A:\YCS\github_ycs_subject_analysis\temp\ycs_gcse_subjects_variables.xlsx"
  
 * YCS5
  

@@ -5,7 +5,7 @@
 
 * YCS11 Preparation of respondent background information
 
-* The location of the folder containing the YCS wave 10 data
+* The location of the folder containing the YCS cohort 11 data
 
  global path5 "A:\data\YCS_Cohort_5_Download\stata8\"
  global path6 "A:\data\YCS_Cohort_6_Download\stata8\"
@@ -426,8 +426,8 @@ codebook t0dadsoc t0mumsoc
 
 * Harmonised variables file
 
-keep t0* ycs11_t0dad_nssec ycs11_t0mum_nssec
-order ycs11_t0dad_nssec ycs11_t0mum_nssec, last
+keep t* ycs11_t0dad_nssec ycs11_t0mum_nssec
+drop teacheas tuitfee
 
 global path3 "A:\YCS\github_ycs_subject_analysis\data\"
 save $path3\ycs11_background_vars.dta, replace
