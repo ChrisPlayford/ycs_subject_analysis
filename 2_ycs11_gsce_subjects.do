@@ -167,6 +167,9 @@ tab t0examst, missing
 
 * Thirteen standard GCSE subjects (variables s1q15a2-s1q15m2)
 
+/*
+Need to drop the numlabel because of string matching
+
 numlabel 	s1q15a2 ///
 			s1q15b2 ///
 			s1q15c2 ///
@@ -180,6 +183,7 @@ numlabel 	s1q15a2 ///
 			s1q15k2 ///
 			s1q15l2 ///
 			s1q15m2, add
+*/
 
 * Thirteen standard GCSE subjects (variables s1q15a1-s1q15m1)
 
@@ -201,12 +205,16 @@ tab s1q15m2, mi		/* 18 Other GCSE Subject (Business Studies) */
 
 * GCSE Other Subjects 1-6 - GCSE Grade variables
 
+/*
+Need to drop the numlabel because of string matching
+
 numlabel 	s1q15n3 ///
 			s1q15o3 ///
 			s1q15p3 ///
 			s1q15q3 ///
 			s1q15r3 ///
 			s1q15s3, add
+*/
 
 tab s1q15n3, mi 		/* 11 Other GCSE subject 1 */
 tab s1q15o3, mi 		/* 12 Other GCSE subject 2 */
@@ -244,17 +252,17 @@ foreach x of var 	s1q15a2  ///
 					s1q15r3 ///
 					s1q15s3 ///
 {
-	clonevar t0gcres_raw`1' = `x'
+	decode `x', gen(t0gcres_raw`1')						/* Need decode because numeric */
 	gen 	t0gcsc`1'=.									/* GCSE Points Score Variable */
-	replace	t0gcsc`1'=7 if t0gcres_raw`1'==1
-	replace	t0gcsc`1'=7 if t0gcres_raw`1'==2
-	replace	t0gcsc`1'=6 if t0gcres_raw`1'==3
-	replace	t0gcsc`1'=5 if t0gcres_raw`1'==4
-	replace	t0gcsc`1'=4 if t0gcres_raw`1'==5
-	replace	t0gcsc`1'=3 if t0gcres_raw`1'==6
-	replace	t0gcsc`1'=2 if t0gcres_raw`1'==7
-	replace	t0gcsc`1'=1 if t0gcres_raw`1'==8
-	replace	t0gcsc`1'=0 if t0gcres_raw`1'==10
+	replace	t0gcsc`1'=7 if t0gcres_raw`1'=="a*"
+	replace	t0gcsc`1'=7 if t0gcres_raw`1'=="a"
+	replace	t0gcsc`1'=6 if t0gcres_raw`1'=="b"
+	replace	t0gcsc`1'=5 if t0gcres_raw`1'=="c"
+	replace	t0gcsc`1'=4 if t0gcres_raw`1'=="d"
+	replace	t0gcsc`1'=3 if t0gcres_raw`1'=="e"
+	replace	t0gcsc`1'=2 if t0gcres_raw`1'=="f"
+	replace	t0gcsc`1'=1 if t0gcres_raw`1'=="g"
+	replace	t0gcsc`1'=0 if t0gcres_raw`1'=="u"
 	gen 	t0gcaf`1'=.									/* GCSE A-F Indicator (vs G/U) */
 	replace	t0gcaf`1'=0 if t0gcsc`1'<2
 	replace t0gcaf`1'=1 if t0gcsc`1'<. & t0gcsc`1'>1 

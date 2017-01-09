@@ -215,16 +215,16 @@ foreach x of var 	a11_1c  ///
 					a11ogc5 ///
 					a11ogc6 ///
 {
-	clonevar t0gcres_raw`1' = `x'
+	decode `x', gen(t0gcres_raw`1')						/* Need decode because numeric */
 	gen 	t0gcsc`1'=.									/* GCSE Points Score Variable */
-	replace	t0gcsc`1'=7 if t0gcres_raw`1'==1
-	replace	t0gcsc`1'=6 if t0gcres_raw`1'==2
-	replace	t0gcsc`1'=5 if t0gcres_raw`1'==3
-	replace	t0gcsc`1'=4 if t0gcres_raw`1'==4
-	replace	t0gcsc`1'=3 if t0gcres_raw`1'==5
-	replace	t0gcsc`1'=2 if t0gcres_raw`1'==6
-	replace	t0gcsc`1'=1 if t0gcres_raw`1'==7
-	replace	t0gcsc`1'=0 if t0gcres_raw`1'==8
+	replace	t0gcsc`1'=7 if t0gcres_raw`1'=="a/a*"
+	replace	t0gcsc`1'=6 if t0gcres_raw`1'=="b"
+	replace	t0gcsc`1'=5 if t0gcres_raw`1'=="c"
+	replace	t0gcsc`1'=4 if t0gcres_raw`1'=="d"
+	replace	t0gcsc`1'=3 if t0gcres_raw`1'=="e"
+	replace	t0gcsc`1'=2 if t0gcres_raw`1'=="f"
+	replace	t0gcsc`1'=1 if t0gcres_raw`1'=="g"
+	replace	t0gcsc`1'=0 if t0gcres_raw`1'=="u"
 	gen 	t0gcaf`1'=.									/* GCSE A-F Indicator (vs G/U) */
 	replace	t0gcaf`1'=0 if t0gcsc`1'<2
 	replace t0gcaf`1'=1 if t0gcsc`1'<. & t0gcsc`1'>1 

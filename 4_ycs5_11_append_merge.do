@@ -156,21 +156,63 @@ clear
 use $path3\ycs5_789_merged.dta, clear
 tab t0cohort, mi
 
+set more off
 append using $path3\ycs6_merged.dta
+append using $path3\ycs10_merged.dta
+append using $path3\ycs11_merged.dta
+
+tab t0cohort t0source, mi
+
+* Ordering the variables
+
+order t0gc*, seq last
+order ycs10_id, after(t0caseid)
+
+order 	t0dadsoc2000 ///
+		t0mumsoc2000 ///
+		ycs11_t0dad_nssec ///
+		ycs11_t0mum_nssec, ///
+			after(t0mumsoc)
+
+order	t0gor, after(t0region)
+			
+order	t0dadse t0mumse, after(t0mumjob)
+			
+order 	t0gc1eng ///
+		t0gc2math ///
+		t0gc3his ///
+		t0gc4geo ///
+		t0gc5fre ///
+		t0gc6cdt ///
+		t0gc7bio ///
+		t0gc8phy ///
+		t0gc9che ///
+		t0gc10sci ///
+		t0gc12othsci ///
+		t0gc13othhum ///
+		t0gc14othlan ///
+		t0gc15re ///
+		t0gc16arts ///
+		t0gc17ped ///
+		t0gc18other, ///
+			after(t0score)
+
+codebook, compact
+
+* The dataset is quite large because of the retention of string variables (raw GCSEs).
+
+save $path3\ycs5_to_11_set1.dta, replace
 
 ***
 
-* NEED TO SORT OUT SOME STRING VALUES IN THE RAW GCSE INFO
+* A reduced dataset - removing the string variables containing the raw subject grade information
 
-* YCS 10 and YCS 11 have numeric raw variables
-* Go back to the loop (the clonevar) and put in a decode, gen() command
-* Then re-run all the do-files involving YCS10 and YCS11
+use $path3\ycs5_to_11_set1.dta, clear
 
-***
+drop t0gcres_raw*
+describe
 
-* append using $path3\ycs10_merged.dta
-* append using $path3\ycs11_merged.dta
-tab t0cohort, mi
+save $path3\ycs5_to_11_set2.dta, replace
 
 clear
 

@@ -81,6 +81,10 @@ keep 	t0cohort ///
 		t0region ///
 		t0dadsoc ///
 		t0mumsoc ///
+		t0examst ///	/* This needs to be retained - derived in YCS6, 10 & 11 */
+		t0examac ///	/* This needs to be retained - derived in YCS6, 10 & 11 */
+		t0examaf ///	/* This needs to be retained - derived in YCS6, 10 & 11 */
+		t0score ///		/* This needs to be retained - derived in YCS6, 10 & 11 */
 		t0dadse ///
 		t0mumse ///
 		t0gor

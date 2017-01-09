@@ -171,7 +171,7 @@ Planning the next steps:
 
 * Download appropriate files for SOC90/SOC2000 lookup from CAMSIS website (depending on decision made during previous preparation).
 
-* Use t0dadsoc and t0mumsoc variables + employmen statuses in extended ew_core.data to produce parental stratification measures by merging with CAMSIS website lookups.
+* Use t0dadsoc and t0mumsoc variables + employment statuses in extended ew_core.data to produce parental stratification measures by merging with CAMSIS website lookups.
 
 * The extended ew_core.dta file should now have subject and background information for YCS5-11.
 
@@ -185,17 +185,39 @@ Planning the next steps:
 
 Quite a lot of minor changes this morning and yesterday afternoon
 
-- Recoded the SOC2000 information with the appropriate codes for YCS10
-- Created a new ID variable for YCS10 datasets (background_vars and gcse_subjects) to enable merging
-- Added some extra file paths
-- Checked through YCS10 and YCS11 background variables
-- Created a couple of files inspecting the contents of the datasets by creating an Excel spreadsheet
-	- '4_inspection_background_vars_datasets.do'
-	- '4_inspection_gcse_subjects_datasets.do'
+* Recoded the SOC2000 information with the appropriate codes for YCS10
+* Created a new ID variable for YCS10 datasets (background_vars and gcse_subjects) to enable merging
+* Added some extra file paths
+* Checked through YCS10 and YCS11 background variables
+* Created a couple of files inspecting the contents of the datasets by creating an Excel spreadsheet
+	* '4_inspection_background_vars_datasets.do'
+	* '4_inspection_gcse_subjects_datasets.do'
 
 This afternoon I have worked on checking for consistency, appending and merging the datasets. Some minor labelling errors have been corrected.
 
 On Monday I need to go back and sort out the issue with integer raw variables (see end of '4_ycs5_11_append_merge.do') using the decode command. 
+
+***
+
+9th January 2017
+
+* Cleaned up issue with numeric raw subject grade variables in YCS10 and YCS11. These were string variables for all other YCS cohorts. Used decode command in '2_ycs10_gsce_subjects' & '2_ycs11_gsce_subjects'.
+
+* Corrected mistaken omission of t0examst, t0examac, t0examaf and t0score from YCS5, YCS7, YCS8 & YCS9.
+
+* Ordered variables and created two datasets:
+	* 'ycs5_to_11_set1.dta' contains all variables
+	* 'ycs5_to_11_set2.dta' is a subset of variables
+
+* If we change our mind, we can return to this.
+
+* Contemplating that I might want to record the highest score (not just highest A*-C) in 18 main subjects.
+
+NEXT STEPS:
+
+* Download appropriate files for SOC90/SOC2000 lookup from CAMSIS website (depending on decision made during previous preparation).
+* Use t0dadsoc and t0mumsoc variables + employment statuses in extended ew_core.data to produce parental stratification measures by merging with CAMSIS website lookups.
+* The extended ew_core.dta file should now have subject and background information for YCS5-11.
 
 ***
 
