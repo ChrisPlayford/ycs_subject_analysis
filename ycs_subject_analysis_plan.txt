@@ -213,6 +213,8 @@ On Monday I need to go back and sort out the issue with integer raw variables (s
 
 * Contemplating that I might want to record the highest score (not just highest A*-C) in 18 main subjects.
 
+UPDATE 1515: I have added the highest score variables alongside the highest A*-C grades in the 18 main subjects
+
 NEXT STEPS:
 
 * Download appropriate files for SOC90/SOC2000 lookup from CAMSIS website (depending on decision made during previous preparation).

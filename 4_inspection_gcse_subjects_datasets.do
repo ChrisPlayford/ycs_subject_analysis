@@ -23,14 +23,14 @@ global path13 "A:\data\YCS_Cohort_13_Download\stata9\"
 
 * Creating an Excel spreadsheet of the variables and variable labels
 
-capture erase "A:\YCS\github_ycs_subject_analysis\temp\ycs_gcse_subjects_variables.xlsx"
+capture erase $path2\ycs_gcse_subjects_variables.xlsx
  
 * YCS5
  
 use $path3\ycs5_gsce_subjects.dta, clear
 describe, replace
 export excel using ///
-	"A:\YCS\github_ycs_subject_analysis\temp\ycs_gcse_subjects_variables.xlsx", ///
+	$path2\ycs_gcse_subjects_variables.xlsx, ///
 		firstrow(varlabels) sheet("YCS5") sheetreplace
 
 ***
@@ -40,7 +40,7 @@ export excel using ///
 use $path3\ycs6_gsce_subjects.dta, clear
 describe, replace
 export excel using ///
-	"A:\YCS\github_ycs_subject_analysis\temp\ycs_gcse_subjects_variables.xlsx", ///
+	$path2\ycs_gcse_subjects_variables.xlsx, ///
 		firstrow(varlabels) sheet("YCS6") sheetmodify
 		
 ***
@@ -50,7 +50,7 @@ export excel using ///
 use $path3\ycs7_gsce_subjects.dta, clear
 describe, replace
 export excel using ///
-	"A:\YCS\github_ycs_subject_analysis\temp\ycs_gcse_subjects_variables.xlsx", ///
+	$path2\ycs_gcse_subjects_variables.xlsx, ///
 		firstrow(varlabels) sheet("YCS7") sheetmodify
 
 ***
@@ -60,7 +60,7 @@ export excel using ///
 use $path3\ycs8_gsce_subjects.dta, clear
 describe, replace
 export excel using ///
-	"A:\YCS\github_ycs_subject_analysis\temp\ycs_gcse_subjects_variables.xlsx", ///
+	$path2\ycs_gcse_subjects_variables.xlsx, ///
 		firstrow(varlabels) sheet("YCS8") sheetmodify
 
 ***
@@ -70,7 +70,7 @@ export excel using ///
 use $path3\ycs9_gsce_subjects.dta, clear
 describe, replace
 export excel using ///
-	"A:\YCS\github_ycs_subject_analysis\temp\ycs_gcse_subjects_variables.xlsx", ///
+	$path2\ycs_gcse_subjects_variables.xlsx, ///
 		firstrow(varlabels) sheet("YCS9") sheetmodify
 		
 ***
@@ -80,7 +80,7 @@ export excel using ///
 use $path3\ycs10_gsce_subjects.dta, clear
 describe, replace
 export excel using ///
-	"A:\YCS\github_ycs_subject_analysis\temp\ycs_gcse_subjects_variables.xlsx", ///
+	$path2\ycs_gcse_subjects_variables.xlsx, ///
 		firstrow(varlabels) sheet("YCS10") sheetmodify
 
 ***
@@ -90,7 +90,7 @@ export excel using ///
 use $path3\ycs11_gsce_subjects.dta, clear
 describe, replace
 export excel using ///
-	"A:\YCS\github_ycs_subject_analysis\temp\ycs_gcse_subjects_variables.xlsx", ///
+	$path2\ycs_gcse_subjects_variables.xlsx, ///
 		firstrow(varlabels) sheet("YCS11") sheetmodify
 
 clear

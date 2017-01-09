@@ -23,14 +23,14 @@ global path13 "A:\data\YCS_Cohort_13_Download\stata9\"
 
 * Creating an Excel spreadsheet of the variables and variable labels
 
-capture erase "A:\YCS\github_ycs_subject_analysis\temp\ycs_background_variables.xlsx"
+capture erase $path2\ycs_background_variables.xlsx
 
 * YCS 5,7,8,9
  
 use $path3\ycs5_789_background_vars.dta, clear
 describe, replace
 export excel using ///
-	"A:\YCS\github_ycs_subject_analysis\temp\ycs_background_variables.xlsx", ///
+	$path2\ycs_background_variables.xlsx, ///
 		firstrow(varlabels) sheet("YCS5_789") sheetreplace
 
 
@@ -41,7 +41,7 @@ export excel using ///
 use $path3\ycs6_background_vars.dta, clear
 describe, replace
 export excel using ///
-	"A:\YCS\github_ycs_subject_analysis\temp\ycs_background_variables.xlsx", ///
+	$path2\ycs_background_variables.xlsx, ///
 		firstrow(varlabels) sheet("YCS6") sheetmodify
 		
 ***
@@ -51,7 +51,7 @@ export excel using ///
 use $path3\ycs10_background_vars.dta, clear
 describe, replace
 export excel using ///
-	"A:\YCS\github_ycs_subject_analysis\temp\ycs_background_variables.xlsx", ///
+	$path2\ycs_background_variables.xlsx, ///
 		firstrow(varlabels) sheet("YCS10") sheetmodify
 
 ***
@@ -61,7 +61,7 @@ export excel using ///
 use $path3\ycs11_background_vars.dta, clear
 describe, replace
 export excel using ///
-	"A:\YCS\github_ycs_subject_analysis\temp\ycs_background_variables.xlsx", ///
+	$path2\ycs_background_variables.xlsx, ///
 		firstrow(varlabels) sheet("YCS11") sheetmodify
 
 clear

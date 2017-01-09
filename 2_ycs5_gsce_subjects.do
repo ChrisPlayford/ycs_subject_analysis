@@ -627,6 +627,143 @@ tab1 t0gc1eng t0gc2math t0gc3his, mi
 
 ***
 
+* HIGHEST GCSE SCORE
+
+* This next section takes each of the standard 18 subjects and ascertains the highest score received for each.
+* 	For example, the highest score received for English 
+* 	across the English variable and the 7 extra subject variables
+*	e.g. English: highest score received in t0gc1 or t0gc12-t0gc18 where t0gc12sub-t0gc18sub is English
+
+tab t0gcsc1, mi		/* 1 English */
+tab t0gcsc2, mi		/* 2 Maths */
+tab t0gcsc3, mi		/* 3 History */
+tab t0gcsc4, mi		/* 4 Geography */
+tab t0gcsc5, mi		/* 5 French */
+tab t0gcsc6, mi		/* 6 CDT */
+tab t0gcsc7, mi		/* 7 Biology */
+tab t0gcsc8, mi		/* 8 Physics */
+tab t0gcsc9, mi		/* 9 Chemistry */
+tab t0gcsc10, mi	/* 10 Combined Science */
+
+* In YCS5, there is only one combined science grade provided (not double science)
+
+* This loop goes across all of these subjects and takes the maximum grade
+
+set more off
+forvalues j = 1(1)10 {
+	capture drop temp12-temp18
+	forvalues i = 12(1)18 {
+		gen temp`i' = t0gcsc`i' if t0gc`i'sub==`j'
+		}
+		egen t0gcsc`j'_1 = rowmax(t0gcsc`j' temp12-temp18)
+		drop temp12-temp18
+		}
+
+* Quality Assurance Check - Maths - Manual calculation
+
+capture drop gc2math_sc
+gen gc2math_sc=.
+forval j = 0(1)7    {
+		replace gc2math_sc=`j' if t0gcsc2==`j' | ///
+		(t0gc12sub==2 & t0gcsc12==`j') | ///
+		(t0gc13sub==2 & t0gcsc13==`j') | ///
+		(t0gc14sub==2 & t0gcsc14==`j') | ///
+		(t0gc15sub==2 & t0gcsc15==`j') | ///
+		(t0gc16sub==2 & t0gcsc16==`j') | ///
+		(t0gc17sub==2 & t0gcsc17==`j') | ///
+		(t0gc18sub==2 & t0gcsc18==`j')
+					}
+tab gc2math_sc t0gcsc2_1, mi
+drop gc2math_sc
+
+***
+
+* Remaining GCSE subjects - there are no "main" variables recording these
+* All the information is from the 7 extra GCSE variables
+
+* This loop goes across all of these subjects and takes the maximum grade
+
+set more off
+forvalues j = 12(1)18 {
+	capture drop temp12-temp18
+	forvalues i = 12(1)18 {
+		gen temp`i' = t0gcsc`i' if t0gc`i'sub==`j'
+		}
+		egen t0gcsc`j'_1 = rowmax(temp12-temp18)
+		drop temp12-temp18
+		}
+
+* Quality Assurance Check - Other Science
+
+capture drop gc12othsci_sc
+gen gc12othsci_sc=.
+forval j = 0(1)7    {
+		replace gc12othsci_sc=`j' if ///
+		(t0gc12sub==12 & t0gcsc12==`j') | ///
+		(t0gc13sub==12 & t0gcsc13==`j') | ///
+		(t0gc14sub==12 & t0gcsc14==`j') | ///
+		(t0gc15sub==12 & t0gcsc15==`j') | ///
+		(t0gc16sub==12 & t0gcsc16==`j') | ///
+		(t0gc17sub==12 & t0gcsc17==`j') | ///
+		(t0gc18sub==12 & t0gcsc18==`j')
+					}
+tab t0gcsc12_1 gc12othsci, mi
+drop gc12othsci
+
+***
+
+rename  t0gcsc1_1 t0gc1eng_sc
+rename  t0gcsc2_1 t0gc2math_sc
+rename  t0gcsc3_1 t0gc3his_sc
+rename  t0gcsc4_1 t0gc4geo_sc
+rename  t0gcsc5_1 t0gc5fre_sc
+
+rename  t0gcsc6_1 t0gc6cdt_sc
+rename  t0gcsc7_1 t0gc7bio_sc
+rename  t0gcsc8_1 t0gc8phy_sc
+rename  t0gcsc9_1 t0gc9che_sc
+rename t0gcsc10_1 t0gc10sci_sc
+
+rename t0gcsc12_1 t0gc12othsci_sc
+rename t0gcsc13_1 t0gc13othhum_sc
+rename t0gcsc14_1 t0gc14othlan_sc
+rename t0gcsc15_1 t0gc15re_sc
+
+rename t0gcsc16_1 t0gc16arts_sc
+rename t0gcsc17_1 t0gc17ped_sc
+rename t0gcsc18_1 t0gc18other_sc
+
+* Label variables
+
+label variable t0gc1eng_sc 		"GCSE English Grade (highest score)"
+label variable t0gc2math_sc 	"GCSE Maths Grade (highest score)"
+label variable t0gc3his_sc 		"GCSE History Grade (highest score)"
+label variable t0gc4geo_sc 		"GCSE Geography Grade (highest score)"
+label variable t0gc5fre_sc 		"GCSE French Grade (highest score)"
+
+label variable t0gc6cdt_sc 		"GCSE CDT Grade (highest score)"
+label variable t0gc7bio_sc 		"GCSE Biology Grade (highest score)"
+label variable t0gc8phy_sc 		"GCSE Physics Grade (highest score)"
+label variable t0gc9che_sc 		"GCSE Chemistry Grade (highest score)"
+label variable t0gc10sci_sc 	"GCSE Double Science Grade (highest score)"
+
+label variable t0gc12othsci_sc 	"GCSE Other Science Grade (highest score)"
+label variable t0gc13othhum_sc 	"GCSE Other Humanity Grade (highest score)"
+label variable t0gc14othlan_sc 	"GCSE Other Language Grade (highest score)"
+label variable t0gc15re_sc 		"GCSE RE Grade (highest score)"
+
+label variable t0gc16arts_sc 	"GCSE Arts Grade (highest score)"
+label variable t0gc17ped_sc 	"GCSE PE Grade (highest score)"
+label variable t0gc18other_sc 	"GCSE Other Subject Grade (highest score)"
+
+tab1 t0gc1eng_sc t0gc2math_sc t0gc3his_sc, mi
+
+tab t0gc1eng_sc t0gc1eng, mi
+
+* Potentially rename t0gc10sci as "GCSE Science Grade (highest)"
+
+***
+
 * Rename the identifying variables
 
 rename caseno t0caseid
