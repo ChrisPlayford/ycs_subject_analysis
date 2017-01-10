@@ -241,6 +241,19 @@ Analytical decisions (for the record):
 * I have coded employment status as 7 "employees" rather than 0 "missing". If I do not do this, the number of missing cases is huge (approx 80% of the dataset).
 * Employment status is coded as 2 "self-employed with fewer than 25 employees" when a parent is flagged as being self-employed. No other information is available.
 
+* UPDATE 1630:
+
+* I have added two files:
+	* 4_ycs5_11_recoding_preparation.do
+	* 5_ycs5_11_analysis1_exploration.do
+
+* These initial investigations suggest a very consistent 4 class model when using the same specification as per YCS6.
+* I am contemplating whether my do-files from the SLS analysis would be useful (would need to request or get from Ladywell House).
+
+NEXT STEPS:
+
+* Further investigation of different subject-grouping categorisation
+
 ***
 
 * END *
