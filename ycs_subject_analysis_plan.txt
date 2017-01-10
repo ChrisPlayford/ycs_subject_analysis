@@ -233,6 +233,14 @@ NEXT STEPS:
 * Potential recoded variables summarising GCSE subjects variables
 * Prepare dummy codings for predictive models
 
+Analytical decisions (for the record):
+
+* Kept 'U' grade in A*-C/A*-F measures (t0examac & t0examaf) for consistency with t0score where a 'U' is awarded zero points. We can change this if we want to.
+* The classification of subjects into 18 main subject groupings is done through recodes in the subjects do-files. There may be minor debates around the exact classification of a subject to a grouping.
+* The subjects classification includes IT as "12 Other Science" - on the basis that Computer Science is classified as a Science.
+* I have coded employment status as 7 "employees" rather than 0 "missing". If I do not do this, the number of missing cases is huge (approx 80% of the dataset).
+* Employment status is coded as 2 "self-employed with fewer than 25 employees" when a parent is flagged as being self-employed. No other information is available.
+
 ***
 
 * END *
