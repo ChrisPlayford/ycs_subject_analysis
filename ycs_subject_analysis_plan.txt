@@ -223,4 +223,16 @@ NEXT STEPS:
 
 ***
 
+10th January 2017
+
+* I have added variables from the CAMSIS website: NS-SEC, RGSC & CAMSIS.
+
+NEXT STEPS:
+
+* Exploratory analyses of GCSE subjects variables
+* Potential recoded variables summarising GCSE subjects variables
+* Prepare dummy codings for predictive models
+
+***
+
 * END *
