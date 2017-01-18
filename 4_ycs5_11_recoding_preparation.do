@@ -116,29 +116,55 @@ tab1 	t0gc1eng     t0gc2math    t0gc3his     t0gc4geo t0gc5fre ///
 * English (manifest variable)
 
 egen english = anyvalue (t0gc1eng), v(0/2)
+label variable english "Highest Grade in GCSE English subjects"
 tab1 t0gc1eng english, missing
 
 * Maths (manifest variable)
 
 egen maths = anyvalue (t0gc2math), v(0/2)
+label variable maths "Highest Grade in GCSE Maths subjects"
 tab1 t0gc2math maths, missing
 
 * Science (manifest variable)
 
 egen science = rmax (t0gc7bio t0gc8phy t0gc9che t0gc10sci t0gc12othsci)
+label variable science "Highest Grade in GCSE Science subjects"
 tab science, missing
 
 * Humanity (manifest variable)
 
 egen humanity = rmax (t0gc3his t0gc4geo t0gc13othhum t0gc15re)
+label variable humanity "Highest Grade in GCSE Humanity subjects"
 tab humanity, missing
 
 * Other Subject (manifest variable)
 
 egen othersub = rmax (t0gc5fre t0gc6cdt t0gc14othlan t0gc16arts t0gc17ped t0gc18other)
+label variable othersub "Highest Grade in GCSE Other subjects"
 tab othersub, missing
 
 ***
+
+* Alternative groupings
+
+* I attempted this with Creative Arts as a grouping but over half of pupils don't study these.
+* The resultant sample size is approx 24,000 which is a waste of information.
+
+* Languages (manifest variable)
+
+egen language = rmax (t0gc5fre t0gc14othlan)
+label variable language "Highest Grade in GCSE Languages"
+tab language, missing
+
+* Other Subject 2 (manifest variable)
+
+egen othersub2 = rmax (t0gc6cdt t0gc16arts t0gc17ped t0gc18other)
+label variable othersub2 "Highest Grade in GCSE Other subjects (CDT, PE & Other)"
+tab othersub, missing
+
+***
+
+* Sample definitions
 
 * Identify likely sample size (comprehensive pupils only)
 
@@ -157,11 +183,36 @@ misstable patterns 	t0sex ///
 					othersub ///
 						if (t0schtyp==2 | t0schtyp==3), freq
 
-* Creating marker variable indicating sample of interest.
-						
-mark sample if (t0schtyp==2 | t0schtyp==3)
+* Sample for all available subject information
 
-markout sample		t0sex ///
+mark    sample1
+markout sample1		english ///
+					maths ///
+					science ///
+					humanity ///
+					othersub
+
+label variable sample1 "Sample - nonmissing GCSE subjects"
+tab sample1, mi
+
+* Sample for all available subject information (alternative grouping)
+
+mark    sample2
+markout sample2		english ///
+					maths ///
+					science ///
+					humanity ///
+					language ///
+					othersub2
+
+label variable sample2 "Sample - nonmissing GCSE subjects (alternative grouping)"
+tab sample2, mi
+						
+* Creating marker variable indicating sample of interest - subjects & covariates.
+						
+mark sample3 if (t0schtyp==2 | t0schtyp==3)
+
+markout sample3		t0sex ///
 					t0ethnic ///
 					t0house ///
 					t0stay ///
@@ -173,9 +224,30 @@ markout sample		t0sex ///
 					science ///
 					humanity ///
 					othersub
-tab sample, mi
 
-* I will return to this dataset and code the dummy variables (as required).
+label variable sample3 "Sample - nonmissing GCSE subjects & covariates"
+tab sample3, mi
+
+* Creating marker variable indicating sample of interest - alt subject grouping & covariates.
+						
+mark sample4 if (t0schtyp==2 | t0schtyp==3)
+
+markout sample4		t0sex ///
+					t0ethnic ///
+					t0house ///
+					t0stay ///
+					t0par_nssec ///
+					t0par_rgsc ///
+					t0par_mcamsis ///
+					english ///
+					maths ///
+					science ///
+					humanity ///
+					language ///
+					othersub2
+
+label variable sample4 "Sample - nonmissing GCSE subjects (alt grouping) & covariates"
+tab sample4, mi
 
 ***
 
