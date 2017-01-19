@@ -256,4 +256,20 @@ NEXT STEPS:
 
 ***
 
+19th January 2017
+
+* I have explored the number of latent class using both the same and an alternative subject grouping to YCS6.
+* 4 Class models fit the best in both cases once the samples are reduced to the working set (complete cases on independent variables).
+* I have defined these samples in the dataset
+* I have merged the assigned classes with the main dataset
+* I have fitted an initial multinomial logistic regression model to the modal latent class assignment
+* The results are very consistent with previous work using YCS6
+
+NEXT STEPS:
+
+* Harmomise the order of the latent classes
+* Speak with Vernon about format of dataset and preliminary results (may produce some outputs to demonstrate this).
+
+***
+
 * END *

@@ -1,4 +1,4 @@
-* 10th January 2017
+* 18th January 2017
 
 * Dr Chris Playford
 * Youth Cohort Study - Latent Class Analysis
@@ -24,7 +24,7 @@ set more off
 
 ***
 
-* LCA - Sample 3 - subjects & covariates
+* LCA - Sample 3 - subjects & covariates (4 Class Model)
 
 use $path3\ycs5_to_11_set4.dta, clear
 numlabel _all, add
@@ -89,7 +89,7 @@ save $path3\ycs5_to_11_sample3_lc_assign.dta, replace
 
 ***
 
-* LCA - Sample 4 - alt subject grouping & covariates
+* LCA - Sample 4 - alt subject grouping & covariates (5 Class Model)
 
 use $path3\ycs5_to_11_set4.dta, clear
 numlabel _all, add
@@ -116,12 +116,91 @@ doLCA english maths science humanity language othersub2, ///
 	  categories(2 2 2 2 2 2) ///
 	  freq(count)
 
-return list
-
 matrix list r(gamma)
 matrix list r(rho)
 
-* Repeat the steps above for this sample.
+* Creating an ID variable to join on based on subject combinations
+
+egen lc_comb2 = concat(english maths science humanity language othersub2), format(%9.0f)
+destring lc_comb2, replace
+label variable lc_comb2				"Sample 4 - Subject-Outcome pattern"
+tab lc_comb2, missing
+codebook lc_comb2
+
+* A number of fields are not required
+
+drop _ppcm* 	/* These are the overall latent class probabilities (gamma)*/
+drop _draw*		/* Pseudo-draws */
+drop english maths science humanity language othersub2 count
+
+* Rename latent class assignment probability fields and modal class assignemtn
+
+rename _post_prob* sample4_pp*
+rename _Best_Index sample4_modal_class
+
+label variable sample4_pp1 			"Sample 4 - LC1 Poor Grades - posterior probability"
+label variable sample4_pp2 			"Sample 4 - LC2 Arts - posterior probability"
+label variable sample4_pp3 			"Sample 4 - LC3 Science - posterior probability"
+label variable sample4_pp4 			"Sample 4 - LC4 Good Grades - posterior probability"
+label variable sample4_modal_class 	"Sample 4 - Modal Class Assignment"
+
+label define best2 1 "Poor Grades" 2 "Arts" 3 "Science" 4 "Good Grades" 
+label values sample4_modal_class best2
+
+order lc_comb2, first
+list
+
+* Save dataset
+
+save $path3\ycs5_to_11_sample4_lc_assign.dta, replace
+
+clear
+
+***
+
+* Merging the latent class assingment datasets with the main data
+
+use $path3\ycs5_to_11_set4.dta, clear
+numlabel _all, add
+
+* Sample 3 - Creating an ID variable to join on based on subject combinations
+
+egen lc_comb = concat(english maths science humanity othersub), format(%9.0f)
+destring lc_comb, replace force
+replace lc_comb=. if sample3==0		/* Only want complete cases */
+
+label variable lc_comb 				"Sample 3 - Subject-Outcome pattern"
+tab1 lc_comb sample3, missing
+codebook lc_comb sample3
+
+* Sample 4 - Creating an ID variable to join on based on subject combinations
+
+egen lc_comb2 = concat(english maths science humanity language othersub2), format(%9.0f)
+destring lc_comb2, replace force
+replace lc_comb2=. if sample4==0	/* Only want complete cases */
+
+label variable lc_comb2				"Sample 4 - Subject-Outcome pattern"
+tab1 lc_comb2 sample4, missing
+codebook lc_comb2 sample4
+
+* Merge Sample 3 Latent Class Assignement Information
+
+merge m:1 lc_comb using $path3\ycs5_to_11_sample3_lc_assign.dta
+drop _merge
+
+* Merge Sample 4 Latent Class Assignement Information
+
+merge m:1 lc_comb2 using $path3\ycs5_to_11_sample4_lc_assign.dta
+drop _merge
+
+* Brief investigation (different value ordering) - some leakage.
+
+tab1 sample3_modal_class sample4_modal_class, mi
+tab  sample3_modal_class sample4_modal_class, mi
+
+* Save dataset
+
+save $path3\ycs5_to_11_set5.dta, replace
 
 clear
 

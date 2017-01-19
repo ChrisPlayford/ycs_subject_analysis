@@ -72,10 +72,40 @@ egen t0par_mcamsis = rowmin(t0dad_mcamsis t0mum_mcamsis)
 label variable t0par_mcamsis "Parental (Male) CAMSIS score"
 codebook t0dad_mcamsis t0mum_mcamsis t0par_mcamsis
 
+* Parental NS-SEC needs to use integers (not 1.1 & 1.2)
+
+recode  t0par_nssec (1.1 = 1 "1.1 Large employers and higher managerial") ///
+					(1.2 = 2 "1.2 Higher professionals ") ///
+					(2   = 3 "2 Lower managerial and professional") ///
+					(3   = 4 "3 Intermediate ") ///
+					(4   = 5 "4 Small employers and own account") ///
+					(5   = 6 "5 Lower supervisory and technical") ///
+					(6   = 7 "6 Semi-routine") ///
+					(7   = 8 "7 Routine"), gen(t0par_nssec2)
+
+label variable t0par_nssec2 "Parental National Statistics Socio-Economic Classification (Reduced Form)"
+
+tab t0par_nssec t0par_nssec2, mi
+
+* Parental RGSC needs to use integers (not 1.1 & 1.2)
+
+recode  t0par_rgsc  (1   = 1 "I Professional") ///
+					(2   = 2 "II Managerial and technical") ///
+					(3.1 = 3 "IIIN Skilled non-manual") ///
+					(3.2 = 4 "IIIM Skilled manual") ///
+					(4   = 5 "IV Partly-skilled occupations") ///
+					(5   = 6 "V Unskilled"), gen(t0par_rgsc2)
+
+label variable t0par_rgsc2 "Parental Registrar-General's Social Class"
+
+tab t0par_rgsc t0par_rgsc2, mi
+
 * Change order of variables
 
 order 	t0par_nssec ///
+		t0par_nssec2 ///
 		t0par_rgsc ///
+		t0par_rgsc2 ///
 		t0par_mcamsis, ///
 			after(t0mum_rgsc)
 

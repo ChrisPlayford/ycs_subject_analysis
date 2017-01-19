@@ -354,6 +354,118 @@ clear
 
 * I have put these initial models in the 'Number of Classes' tab in 'ycs5_11_lca_4class_20170110_cp_v1.xlsx' in the temp folder.
 
+***
+
+* 19th January 2017
+
+* Testing to see whether the number of latent classes is the same for the samples with covariates
+
+* Exploratory LCA - Sample 3 - subjects & covariates
+
+use $path3\ycs5_to_11_set4.dta, clear
+numlabel _all, add
+
+keep if sample3==1
+count
+
+keep english maths science humanity othersub 
+tab1 english maths science humanity othersub, missing
+
+sort english maths science humanity othersub
+
+contract english maths science humanity othersub, zero freq(count)
+list, clean
+
+cd C:\ado\plus\l\ 			/* Change this path to match the file location on your machine */
+
+* 4 Class Model
+
+doLCA english maths science humanity othersub, ///
+      nclass(4) ///
+	  seed(100) ///
+	  seeddraws(1500) ///
+	  categories(2 2 2 2 2) ///
+	  freq(count)
+
+matrix list r(gamma)
+matrix list r(rho)
+
+* Adjusted BIC = 202.60123
+* Entropy R-sqd = .70189519
+
+* 5 Class Model
+
+doLCA english maths science humanity othersub, ///
+      nclass(5) ///
+	  seed(100) ///
+	  seeddraws(1500) ///
+	  categories(2 2 2 2 2) ///
+	  freq(count)
+
+* Adjusted BIC = 234.33133
+* Entropy R-sqd = .69118701
+* The model did not converge.
+
+* Use a four class model
+
+clear
+
+***
+
+* Exploratory LCA - Sample 4 - alt subject grouping & covariates
+
+use $path3\ycs5_to_11_set4.dta, clear
+numlabel _all, add
+
+keep if sample4==1
+count
+
+keep english maths science humanity language othersub2 
+tab1 english maths science humanity language othersub2, missing
+
+sort english maths science humanity language othersub2
+
+contract english maths science humanity language othersub2, zero freq(count)
+list, clean
+
+cd C:\ado\plus\l\ 			/* Change this path to match the file location on your machine */
+
+* 4 Class Model
+
+doLCA english maths science humanity language othersub2, ///
+      nclass(4) ///
+	  seed(100) ///
+	  seeddraws(1500) ///
+	  categories(2 2 2 2 2 2) ///
+	  freq(count)
+
+matrix list r(gamma)
+matrix list r(rho)
+
+* Adjusted BIC = 483.72022
+* Entropy R-sqd = .68197439
+
+* 5 Class Model
+
+doLCA english maths science humanity language othersub2, ///
+      nclass(5) ///
+	  seed(100) ///
+	  seeddraws(1500) ///
+	  categories(2 2 2 2 2 2) ///
+	  freq(count)
+
+matrix list r(gamma)
+matrix list r(rho)
+
+* Adjusted BIC = 419.70281
+* Entropy R-sqd = .66837309
+* The model did not converge.
+
+* So we stick with a four class model
+
+* Whilst the exploratory LCA with alternative subject groupings suggests 5 classes,
+* when covariates are included the number of cases drops and the number of classes reduces to 4.
+
 clear
 
 * END *
