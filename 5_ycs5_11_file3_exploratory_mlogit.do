@@ -35,6 +35,21 @@ tab sample3_modal_class
 svyset [pw=t1weight]
 svydescribe
 
+* Descriptive Statistics for Latent Classes
+
+mean t0score, over(sample3_modal_class)
+
+* Latent Class Membership by background measures
+
+tab t0cohort 		sample3_modal_class, row nofreq
+tab t0sex 			sample3_modal_class, row nofreq
+tab t0ethnic 		sample3_modal_class, row nofreq
+tab t0house 		sample3_modal_class, row nofreq
+tab t0stay 			sample3_modal_class, row nofreq
+tab t0par_nssec2 	sample3_modal_class, row nofreq
+
+***
+
 * Initial Model
 
 svy: mlogit sample3_modal_class ///
@@ -42,10 +57,34 @@ svy: mlogit sample3_modal_class ///
 				i.t0ethnic ///
 				i.t0house ///
 				i.t0stay ///
-				ib2.t0par_nssec2, base(3)
+				ib2.t0par_nssec2, base(4)
 				
 * Pretty much what I would expect.
 
+* Now include the year
+
+svy: mlogit sample3_modal_class ///
+				i.t0cohort ///
+				i.t0sex ///
+				i.t0ethnic ///
+				i.t0house ///
+				i.t0stay ///
+				ib2.t0par_nssec2, base(4)
+
+***
+
+* Compare middle attainment groups
+
+svy: mlogit sample3_modal_class ///
+				i.t0cohort ///
+				i.t0sex ///
+				i.t0ethnic ///
+				i.t0house ///
+				i.t0stay ///
+				ib2.t0par_nssec2, base(3)
+
+* Less of a clear picture.
+				
 clear
 
 * END *

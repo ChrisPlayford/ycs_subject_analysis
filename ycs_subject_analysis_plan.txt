@@ -272,4 +272,15 @@ NEXT STEPS:
 
 ***
 
+24th January 2017
+
+* I have harmonised the order of the latent classes and looked at some descriptive statistics + initial models
+
+NEXT STEPS:
+
+* Produce some outputs - can form basis of talk.
+* Speak with Vernon about format of dataset and preliminary results.
+
+***
+
 * END *

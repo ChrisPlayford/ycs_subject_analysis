@@ -66,21 +66,29 @@ drop _ppcm* 	/* These are the overall latent class probabilities (gamma)*/
 drop _draw*		/* Pseudo-draws */
 drop english maths science humanity othersub count
 
-* Rename latent class assignment probability fields and modal class assignemtn
+* Rename latent class assignment probability fields and modal class assignment
 
-rename _post_prob* sample3_pp*
-rename _Best_Index sample3_modal_class
+rename _post_prob1 sample3_pp1		/* 1 Poor Grades */
+rename _post_prob4 sample3_pp2		/* 2 Non-Science */
+rename _post_prob2 sample3_pp3		/* 3 Science */
+rename _post_prob3 sample3_pp4		/* 4 Good Grades */
 
 label variable sample3_pp1 			"Sample 3 - LC1 Poor Grades - posterior probability"
-label variable sample3_pp2 			"Sample 3 - LC2 Science - posterior probability"
-label variable sample3_pp3 			"Sample 3 - LC3 Good Grades - posterior probability"
-label variable sample3_pp4 			"Sample 3 - LC4 Arts - posterior probability"
+label variable sample3_pp2 			"Sample 3 - LC2 Non-Science - posterior probability"
+label variable sample3_pp3 			"Sample 3 - LC3 Science - posterior probability"
+label variable sample3_pp4 			"Sample 3 - LC4 Good Grades - posterior probability"
+
+
+recode _Best_Index 	(1 = 1 "Poor Grades") ///
+					(4 = 2 "Non-Science") ///
+					(2 = 3 "Science") ///
+					(3 = 4 "Good Grades") ///
+						, gen(sample3_modal_class)
+
 label variable sample3_modal_class 	"Sample 3 - Modal Class Assignment"
 
-label define best 1 "Poor Grades" 2 "Science" 3 "Good Grades" 4 "Arts"
-label values sample3_modal_class best
-
-order lc_comb, first
+drop _Best_Index
+order lc_comb sample3_pp1 sample3_pp2 sample3_pp3 sample3_pp4, first
 list
 
 * Save dataset
@@ -139,12 +147,12 @@ rename _post_prob* sample4_pp*
 rename _Best_Index sample4_modal_class
 
 label variable sample4_pp1 			"Sample 4 - LC1 Poor Grades - posterior probability"
-label variable sample4_pp2 			"Sample 4 - LC2 Arts - posterior probability"
+label variable sample4_pp2 			"Sample 4 - LC2 Non-Science - posterior probability"
 label variable sample4_pp3 			"Sample 4 - LC3 Science - posterior probability"
 label variable sample4_pp4 			"Sample 4 - LC4 Good Grades - posterior probability"
 label variable sample4_modal_class 	"Sample 4 - Modal Class Assignment"
 
-label define best2 1 "Poor Grades" 2 "Arts" 3 "Science" 4 "Good Grades" 
+label define best2 1 "Poor Grades" 2 "Non-Science" 3 "Science" 4 "Good Grades" 
 label values sample4_modal_class best2
 
 order lc_comb2, first
