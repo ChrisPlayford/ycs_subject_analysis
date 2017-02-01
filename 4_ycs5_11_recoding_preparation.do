@@ -194,6 +194,51 @@ tab othersub, missing
 
 ***
 
+* Aggregate measures of GCSE attainment
+
+mvdecode t0examaf t0examac t0score, mv(-9) 		/* Set to missing */
+
+tab1 t0examac t0examaf, mi
+
+recode t0examac	(0   		= 0 "0 A*-C passes") ///
+				(1/4 		= 1 "1-4 A*-C passes") ///
+				(nonmissing	= 2 "5+ A*-C passes") ///
+					, gen(t03cat)
+
+recode t0examac	(0/4 		= 0 "0-4 A*-C passes") ///
+				(nonmissing	= 1 "5+ A*-C passes") ///
+					, gen(t0fiveac)
+					
+label variable t03cat "Number of GCSE A*-C passes"
+label variable t0fiveac "Gained 5+ GCSE A*-C passes"
+					
+tab t0examac t03cat, mi
+tab t0examac t0fiveac, mi
+
+*
+
+* Same measures but including English and Maths
+
+gen t03cat_em=0
+replace t03cat_em=. if t03cat==.
+replace t03cat_em=1 if t03cat==1 &  english==2 & maths==2
+replace t03cat_em=2 if t03cat==2 &  english==2 & maths==2
+
+label variable t03cat_em "Number of GCSE A*-C passes inc. English & Maths"
+
+gen t0fiveac_em=0
+replace t0fiveac_em=. if t0fiveac==.
+replace t0fiveac_em=1 if t0fiveac==1 &  english==2 & maths==2
+
+label variable t0fiveac_em "Gained 5+ GCSE A*-C passes inc. English & Maths"
+
+tab t03cat_em t03cat, mi
+tab t0fiveac_em t0fiveac, mi
+
+order t03cat t03cat_em t0fiveac t0fiveac_em, after(t0score)
+
+***
+
 * Sample definitions
 
 * Identify likely sample size (comprehensive pupils only)
@@ -215,7 +260,7 @@ misstable patterns 	t0sex ///
 
 * Sample for all available subject information
 
-mark    sample1
+mark    sample1										/* For all school types */
 markout sample1		english ///
 					maths ///
 					science ///
@@ -227,7 +272,7 @@ tab sample1, mi
 
 * Sample for all available subject information (alternative grouping)
 
-mark    sample2
+mark    sample2										/* For all school types */
 markout sample2		english ///
 					maths ///
 					science ///
@@ -240,7 +285,7 @@ tab sample2, mi
 						
 * Creating marker variable indicating sample of interest - subjects & covariates.
 						
-mark sample3 if (t0schtyp==2 | t0schtyp==3)
+mark sample3 if (t0schtyp==2 | t0schtyp==3)			/* For comprehensive school pupils */
 
 markout sample3		t0sex ///
 					t0ethnic ///
@@ -260,7 +305,7 @@ tab sample3, mi
 
 * Creating marker variable indicating sample of interest - alt subject grouping & covariates.
 						
-mark sample4 if (t0schtyp==2 | t0schtyp==3)
+mark sample4 if (t0schtyp==2 | t0schtyp==3)			/* For comprehensive school pupils */
 
 markout sample4		t0sex ///
 					t0ethnic ///

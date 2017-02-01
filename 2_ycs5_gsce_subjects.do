@@ -116,6 +116,7 @@ label variable t0gcst17 "Studied Other GCSE subject 7"
 
 * New variables indicating whether pupil studied for GCSE subject.
 
+set more off
 tab1 t0gcst*, mi
 
 ***
@@ -130,8 +131,11 @@ tab t0examst, missing
 
 * Check against the harmonised file version
 
-* use $path4\ew_core.dta, clear
-* tab t0examst if t0cohort==1990, mi
+preserve
+use $path4\ew_core.dta, clear
+tab t0examst if t0cohort==1990, mi
+restore
+
 * Great - these are the same.
 
 ***
@@ -373,10 +377,12 @@ tab t0score, missing
 
 * Check against the harmonised file version
 
-* use $path4\ew_core.dta, clear
-* tab t0examaf if t0cohort==1990, mi
-* tab t0examac if t0cohort==1990, mi
-* tab t0score if t0cohort==1990, mi
+preserve
+use $path4\ew_core.dta, clear
+tab t0examaf if t0cohort==1990, mi
+tab t0examac if t0cohort==1990, mi
+tab t0score if t0cohort==1990, mi
+restore
 
 ***
 

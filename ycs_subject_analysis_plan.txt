@@ -283,4 +283,19 @@ NEXT STEPS:
 
 ***
 
+1st February 2017
+
+* Returning to this - decided to replicate the tables and figures in the Youth Studies paper
+* Added some derived variables summarising GCSE attainment to '4_ycs5_11_recoding_preparation.do'
+
+Comments:
+
+* I have come to the conclusion that the inclusion of U grades doesn't matter in t0examaf and t0examac
+* This is because t0examaf and t0examac are summary variables and only count the number of passes for grades higher than G or D respectively
+* U or G counts as 0 in both instances
+* U does not contribute to the missing cases (i.e. non-missing) which is correct
+* Therefore comparison of t0examaf, t0examac and t0score in SN5765 with my results will yield the same figures.
+
+***
+
 * END *
