@@ -215,8 +215,6 @@ label variable t0fiveac "Gained 5+ GCSE A*-C passes"
 tab t0examac t03cat, mi
 tab t0examac t0fiveac, mi
 
-*
-
 * Same measures but including English and Maths
 
 gen t03cat_em=0
@@ -232,10 +230,34 @@ replace t0fiveac_em=1 if t0fiveac==1 &  english==2 & maths==2
 
 label variable t0fiveac_em "Gained 5+ GCSE A*-C passes inc. English & Maths"
 
+label define threecat ///
+0 "0 A*-C passes" ///
+1 "1-4 A*-C passes" ///
+2 "5+ A*-C passes"
+
+label define fiveac ///
+0 "0-4 A*-C passes" ///
+1 "5+ A*-C passes"
+
+label values t03cat_em threecat
+label values t0fiveac_em fiveac
+
 tab t03cat_em t03cat, mi
 tab t0fiveac_em t0fiveac, mi
 
-order t03cat t03cat_em t0fiveac t0fiveac_em, after(t0score)
+* Capped Score variable
+
+set more off
+tab t0score, mi
+
+clonevar t0score2 = t0score
+replace t0score2=84 if t0score>84 & t0score<113		/* 84 points is 12 * grade A* or A */
+
+label variable t0score2 "Capped GCSE points score (max 84)"
+
+tab t0score2, mi
+
+order t0score2 t03cat t03cat_em t0fiveac t0fiveac_em, after(t0score)
 
 ***
 

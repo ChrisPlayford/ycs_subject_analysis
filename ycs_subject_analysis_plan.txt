@@ -298,4 +298,11 @@ Comments:
 
 ***
 
+2nd February 2017
+
+* Continue replication of the tables and figures in the Youth Studies paper
+* Minor changes to derived variables
+
+***
+
 * END *

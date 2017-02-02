@@ -206,6 +206,13 @@ drop _merge
 tab1 sample3_modal_class sample4_modal_class, mi
 tab  sample3_modal_class sample4_modal_class, mi
 
+***
+
+* Set the weighting variable
+
+svyset [pw=t1weight]
+svydescribe
+
 * Save dataset
 
 save $path3\ycs5_to_11_set5.dta, replace
