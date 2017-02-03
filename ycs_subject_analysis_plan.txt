@@ -300,8 +300,20 @@ Comments:
 
 2nd February 2017
 
-* Continue replication of the tables and figures in the Youth Studies paper
+* Continued replication of the tables and figures in the Youth Studies paper
 * Minor changes to derived variables
+
+***
+
+3rd February
+
+* Continued replication of the tables and figures in the Youth Studies paper
+* Some minor changes (mvdecode on t0examst)
+
+NEXT STEPS:
+
+* mlogit of latent classes
+* Proportional assignment
 
 ***
 

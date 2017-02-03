@@ -196,7 +196,7 @@ tab othersub, missing
 
 * Aggregate measures of GCSE attainment
 
-mvdecode t0examaf t0examac t0score, mv(-9) 		/* Set to missing */
+mvdecode t0examaf t0examac t0score t0examst, mv(-9) 		/* Set to missing */
 
 tab1 t0examac t0examaf, mi
 

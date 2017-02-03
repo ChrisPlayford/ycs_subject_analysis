@@ -124,7 +124,7 @@ matrix n = (h\i\j\k\l\m),g
 * Rownames for matrix
 
 matrix rownames n = "0 A*-C passes" "1-4 A*-C passes" "5+ A*-C passes" "0 A*-C inc E & M" "1-4 A*-C inc E & M" "5+ A*-C inc E & M" "Mean GCSE points score" "Mean number of GCSEs studied" "Mean number of A*–C passes" "Mean number of A*–F passes"
-matrix colnames n = "1990" "1992" "1993" "1995" "1997" "1999" "2001" "Total"
+matrix colnames n = ":1990" ":1992" ":1993" ":1995" ":1997" ":1999" ":2001" "Total"
 
 * Not sure why the column names cannot be overwritten.
 
@@ -300,6 +300,264 @@ matrix list r(gamma)
 matrix list r(rho)
 
 ***
+
+* Table 6
+
+use $path3\ycs5_to_11_set5.dta, clear
+numlabel _all, add
+
+estimates clear
+capture matrix drop _all
+
+* Summary figures
+
+svy: mean t0examac if sample3==1
+matrix a =  e(b)
+
+svy: mean t0examaf if sample3==1
+matrix b =  e(b)
+
+svy: mean t0score2 if sample3==1
+matrix c =  e(b)
+
+svy: mean t0examst if sample3==1
+matrix d =  e(b)
+
+* By Latent Class
+
+svy: mean t0examac if sample3==1, over(sample3_modal_class)
+matrix e =  e(b)
+
+svy: mean t0examaf if sample3==1, over(sample3_modal_class)
+matrix f =  e(b)
+
+svy: mean t0score2 if sample3==1, over(sample3_modal_class)
+matrix g =  e(b)
+
+svy: mean t0examst if sample3==1, over(sample3_modal_class)
+matrix h =  e(b)
+
+* Concatenate the sub-matrices
+
+matrix i = (e\f\g\h),(a\b\c\d)
+
+* Label the column and row names
+
+matrix colnames i = ":1 Poor Grades" ":2 Science" ":3 Non-Science" ":4 Good Grades" "All"
+matrix rownames i = "Mean number of A*–C passes" "Mean number of A*–F passes" "Mean GCSE points score" "Mean number of GCSEs studied"
+
+* Round the values
+
+forval i = 1/4 {
+	forval j = 1/5 {
+		matrix i[`i',`j'] = round(i[`i',`j'], 0.1)
+}
+}
+
+* Export the matrix
+
+matrix list i
+putexcel A1=matrix(i, names) using "A:\YCS\github_ycs_subject_analysis\outputs\table6.xlsx", replace
+
+***
+
+* Table 7
+
+estimates clear
+capture matrix drop _all
+
+* Summary
+
+* English and Maths individually 
+
+svy: proportion english if sample3==1
+matrix a1 = e(b)
+matrix a  = a1[1,2]
+
+svy: proportion maths if sample3==1
+matrix b1 = e(b)
+matrix b  = b1[1,2]
+
+* Joint English and Maths
+
+gen eng_and_maths=1
+replace eng_and_maths=2 if (english==2 & maths==2)
+
+svy: proportion eng_and_maths if sample3==1
+matrix c1 = e(b)
+matrix c  = c1[1,2]
+
+* Five or more A*-C passes
+
+svy: proportion t0fiveac if sample3==1
+matrix d1 = e(b)
+matrix d  = d1[1,2]
+
+* Five or more A*-C passes (inc English and Maths)
+
+svy: proportion t0fiveac_em if sample3==1
+matrix e1 = e(b)
+matrix e  = e1[1,2]
+
+***
+
+* For each latent class
+
+* English and Maths individually
+
+svy: proportion english if sample3==1, over(sample3_modal_class)
+matrix f1 = e(b)
+matrix f  = f1["y1" , "_prop_2:_subpop_1".."_prop_2:_subpop_4"]
+
+svy: proportion maths if sample3==1, over(sample3_modal_class)
+matrix g1 = e(b)
+matrix g  = g1["y1" , "_prop_2:_subpop_1".."_prop_2:_subpop_4"]
+
+* Joint English and Maths
+
+svy: proportion eng_and_maths if sample3==1, over(sample3_modal_class)
+matrix h1 = e(b)
+matrix h  = h1["y1" , "_prop_2:_subpop_1".."_prop_2:_subpop_4"]
+
+* Five or more A*-C passes
+
+svy: proportion t0fiveac if sample3==1, over(sample3_modal_class)
+matrix i1 = e(b)
+matrix i  = i1["y1" , "_prop_2:_subpop_1".."_prop_2:_subpop_4"]
+
+* Five or more A*-C passes (inc English and Maths)
+
+svy: proportion t0fiveac_em if sample3==1, over(sample3_modal_class)
+matrix j1 = e(b)
+matrix j  = j1["y1" , "_prop_2:_subpop_1".."_prop_2:_subpop_4"]
+
+* Concatenate the sub-matrices
+
+matrix k = (f\g\h\i\j),(a\b\c\d\e)
+
+* Label the column and row names
+
+matrix colnames k = ":1 Poor Grades" ":2 Science" ":3 Non-Science" ":4 Good Grades" "All"
+matrix rownames k = "GCSE English A*-C" "GCSE Maths A*-C" "Both GCSE Eng & Maths A*-C" "5+ A*-C passes" "5+ A*-C inc E & M"
+
+* Round the values
+
+forval i = 1/5 {
+	forval j = 1/5 {
+		matrix k[`i',`j'] = round(k[`i',`j'], 0.01)
+}
+}
+
+* Export the matrix
+
+matrix list k
+putexcel A1=matrix(k, names) using "A:\YCS\github_ycs_subject_analysis\outputs\table7.xlsx", replace
+
+***
+
+* Table 8
+
+use $path3\ycs5_to_11_set5.dta, clear
+numlabel _all, add
+
+estimates clear
+capture matrix drop _all
+
+* svy: tab sample3_modal_class
+* svy: tab t0cohort sample3_modal_class, row
+
+* Cohort
+
+set more off
+svy: proportion sample3_modal_class, over(t0cohort)
+matrix a1 = e(b)
+matrix a  = (a1["y1" , "_prop_1:1990".."_prop_1:2001"] \ a1["y1" , "_prop_2:1990".."_prop_2:2001"] \ a1["y1" , "_prop_3:1990".."_prop_3:2001"] \ a1["y1" , "_prop_4:1990".."_prop_4:2001"] )'
+
+matrix colnames a = "1 Poor Grades" "2 Science" "3 Non-Science" "4 Good Grades"
+matrix rownames a = ":1990" ":1992" ":1993" ":1995" ":1997" ":1999" ":2001"
+
+* Sex
+
+set more off
+svy: proportion sample3_modal_class, over(t0sex)
+matrix b1 = e(b)
+matrix b  = (b1["y1" , "_prop_1:_subpop_1".."_prop_1:_subpop_2"] \ b1["y1" , "_prop_2:_subpop_1".."_prop_2:_subpop_2"] \ b1["y1" , "_prop_3:_subpop_1".."_prop_3:_subpop_2"] \ b1["y1" , "_prop_4:_subpop_1".."_prop_4:_subpop_2"] )'
+
+matrix rownames b = ":Boys" ":Girls"
+
+* Ethnicity
+
+set more off
+svy: proportion sample3_modal_class, over(t0ethnic)
+matrix c1 = e(b)
+matrix c  = (c1["y1" , "_prop_1:_subpop_1".."_prop_1:_subpop_7"] \ c1["y1" , "_prop_2:_subpop_1".."_prop_2:_subpop_7"] \ c1["y1" , "_prop_3:_subpop_1".."_prop_3:_subpop_7"] \ c1["y1" , "_prop_4:_subpop_1".."_prop_4:_subpop_7"] )'
+
+matrix rownames c = ":White" ":Black" ":Indian" ":Pakistani" ":Bangladeshi" ":Other asian" ":Other response"
+
+* Housing
+
+set more off
+svy: proportion sample3_modal_class, over(t0house)
+matrix d1 = e(b)
+matrix d  = (d1["y1" , "_prop_1:_subpop_1".."_prop_1:_subpop_3"] \ d1["y1" , "_prop_2:_subpop_1".."_prop_2:_subpop_3"] \ d1["y1" , "_prop_3:_subpop_1".."_prop_3:_subpop_3"] \ d1["y1" , "_prop_4:_subpop_1".."_prop_4:_subpop_3"] )'
+
+matrix rownames d = ":Owned" ":Rented" ":Other housing"
+
+* Household Type
+
+set more off
+svy: proportion sample3_modal_class, over(t0stay)
+matrix e1 = e(b)
+matrix e  = (e1["y1" , "_prop_1:_subpop_1".."_prop_1:_subpop_4"] \ e1["y1" , "_prop_2:_subpop_1".."_prop_2:_subpop_4"] \ e1["y1" , "_prop_3:_subpop_1".."_prop_3:_subpop_4"] \ e1["y1" , "_prop_4:_subpop_1".."_prop_4:_subpop_4"] )'
+
+matrix rownames e = ":Lives with both parents" ":Only lives with mother" ":Only lives with father" ":Other household"
+
+* NS-SEC
+
+set more off
+svy: proportion sample3_modal_class, over(t0par_nssec2)
+matrix f1 = e(b)
+matrix f  = (f1["y1" , "_prop_1:_subpop_1".."_prop_1:_subpop_8"] \ f1["y1" , "_prop_2:_subpop_1".."_prop_2:_subpop_8"] \ f1["y1" , "_prop_3:_subpop_1".."_prop_3:_subpop_8"] \ f1["y1" , "_prop_4:_subpop_1".."_prop_4:_subpop_8"] )'
+
+matrix rownames f = ":NS1 1" ":NS1 2" ":NS2" ":NS3" ":NS4" ":NS5" ":NS6" ":NS7"
+
+* All
+
+svy: proportion sample3_modal_class
+matrix g1 = e(b)
+matrix rownames g1 = "All"
+
+* n
+
+matrix g2 = e(b) * e(N)
+matrix rownames g2 = "n"
+
+forval j = 1/4 {
+		matrix g2[1,`j'] = round(g2[1,`j'])
+}
+
+matrix list g2
+
+* Concatenate the sub-matrices
+
+matrix h = (a\b\c\d\e\f\g1\g2)
+
+* Round the values
+
+forval i = 1/32 {
+	forval j = 1/4 {
+		matrix h[`i',`j'] = round(h[`i',`j'], 0.01)
+}
+}
+
+* Export the matrix
+
+matrix list h
+putexcel A1=matrix(h, names) using "A:\YCS\github_ycs_subject_analysis\outputs\table8.xlsx", replace
+
+***
+
+* Table 9
 
 clear
 
