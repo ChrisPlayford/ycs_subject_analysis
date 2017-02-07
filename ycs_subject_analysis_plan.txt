@@ -305,7 +305,7 @@ Comments:
 
 ***
 
-3rd February
+3rd February 2017
 
 * Continued replication of the tables and figures in the Youth Studies paper
 * Some minor changes (mvdecode on t0examst)
@@ -314,6 +314,12 @@ NEXT STEPS:
 
 * mlogit of latent classes
 * Proportional assignment
+
+***
+
+7th February 2017
+
+* Fitted mlogit of latent classes (modal assignment)
 
 ***
 

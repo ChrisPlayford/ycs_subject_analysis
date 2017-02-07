@@ -559,6 +559,25 @@ putexcel A1=matrix(h, names) using "A:\YCS\github_ycs_subject_analysis\outputs\t
 
 * Table 9
 
+use $path3\ycs5_to_11_set5.dta, clear
+numlabel _all, rem
+
+mlogit sample3_modal_class ///
+				i.t0cohort ///
+				ib2.t0sex ///
+				i.t0ethnic ///
+				i.t0house ///
+				i.t0stay ///
+				ib2.t0par_nssec2 ///
+					[pw=t1weight], base(4) 
+est store a
+
+esttab a using "A:\YCS\github_ycs_subject_analysis\outputs\table9.rtf", ///
+	b(%9.2f) se(%9.2f) aic(%9.1f) bic(%9.1f) scalars("ll Log lik.") sfmt(%9.1f) pr2 ///
+	starlevels(* .10 ** .05 *** .01) stardetach 	///
+	label mtitles("Multnomial Logit") ///
+	wide staraux nogaps noparentheses replace
+				
 clear
 
 * END *
