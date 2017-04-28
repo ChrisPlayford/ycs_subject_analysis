@@ -248,7 +248,7 @@ doLCA english maths science humanity othersub, ///
 matrix list r(gamma)
 matrix list r(rho)
 
-* 4 Class Model
+* 5 Class Model
 
 doLCA english maths science humanity othersub, ///
       nclass(5) ///
