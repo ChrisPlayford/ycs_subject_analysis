@@ -323,4 +323,9 @@ NEXT STEPS:
 
 ***
 
+5th February 2019
+
+* Need to estimate proportional assignment to latent classes for sensitivity analysis
+* Compare findings with factor analysis
+
 * END *
