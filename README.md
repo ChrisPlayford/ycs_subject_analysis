@@ -14,6 +14,9 @@ THE WORK IN THIS REPOSITORY IS PRIVATE
 © Christopher Playford, University of Exeter.
 
 Dr Chris Playford (c.j.playford@exeter.ac.uk)
+
 http://socialsciences.exeter.ac.uk/sociology/staff/playford/
+
 https://orcid.org/0000-0002-6069-4898
+
 @playford_chris
