@@ -4,7 +4,9 @@ Analysis of Youth Cohort Study (YCS) data - subject specific outcomes in England
 Collaborators:
 
 Christopher Playford, University of Exeter
+
 Vernon Gayle, University of Edinburgh
+
 Roxanne Connelly, University of York
 
 Funder: Economic and Social Research Council Project: Administrative Data Research Centre - Scotland Grant number: ES/L007487/1
@@ -12,6 +14,7 @@ Funder: Economic and Social Research Council Project: Administrative Data Resear
 THE WORK IN THIS REPOSITORY IS PRIVATE
 
 © Christopher Playford, University of Exeter.
+
 
 Dr Chris Playford (c.j.playford@exeter.ac.uk)
 
