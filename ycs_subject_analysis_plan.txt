@@ -328,4 +328,18 @@ NEXT STEPS:
 * Need to estimate proportional assignment to latent classes for sensitivity analysis
 * Compare findings with factor analysis
 
+***
+
+20th February 2019
+
+* Two additional files have been added:
+
+* File 1) 5_ycs5_11_file8_sensitivity_analysis.do
+* File 2) 5_ycs5_11_file9_gsem
+
+* These include:
+*		Multinomial logistic regression model using proportional assignment (file 1)
+*		Factor analysis for comparison (file 1)
+*		Structural Equation Model (one-step LCA) simultaneously estimating measurment and structural model (file 2)
+
 * END *
