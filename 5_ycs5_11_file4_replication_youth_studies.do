@@ -62,7 +62,7 @@ matrix g = (a,b,c,d,e,f)'
 
 * Rownames for matrix
 
-matrix rownames g = "0 A*-C passes" "1-4 A*-C passes" "5+ A*-C passes" "0 A*-C inc E & M" "1-4 A*-C inc E & M" "5+ A*-C inc E & M" "Mean GCSE points score" "Mean number of GCSEs studied" "Mean number of A*–C passes" "Mean number of A*–F passes"
+matrix rownames g = "0 A*-C passes" "1-4 A*-C passes" "5+ A*-C passes" "0 A*-C inc E & M" "1-4 A*-C inc E & M" "5+ A*-C inc E & M" "Mean GCSE points score" "Mean number of GCSEs studied" "Mean number of A*â€“C passes" "Mean number of A*â€“F passes"
 
 * Rounding the values
 
@@ -123,7 +123,7 @@ matrix n = (h\i\j\k\l\m),g
 
 * Rownames for matrix
 
-matrix rownames n = "0 A*-C passes" "1-4 A*-C passes" "5+ A*-C passes" "0 A*-C inc E & M" "1-4 A*-C inc E & M" "5+ A*-C inc E & M" "Mean GCSE points score" "Mean number of GCSEs studied" "Mean number of A*–C passes" "Mean number of A*–F passes"
+matrix rownames n = "0 A*-C passes" "1-4 A*-C passes" "5+ A*-C passes" "0 A*-C inc E & M" "1-4 A*-C inc E & M" "5+ A*-C inc E & M" "Mean GCSE points score" "Mean number of GCSEs studied" "Mean number of A*â€“C passes" "Mean number of A*â€“F passes"
 matrix colnames n = ":1990" ":1992" ":1993" ":1995" ":1997" ":1999" ":2001" "Total"
 
 * Not sure why the column names cannot be overwritten.
@@ -344,7 +344,7 @@ matrix i = (e\f\g\h),(a\b\c\d)
 * Label the column and row names
 
 matrix colnames i = ":1 Poor Grades" ":2 Science" ":3 Non-Science" ":4 Good Grades" "All"
-matrix rownames i = "Mean number of A*–C passes" "Mean number of A*–F passes" "Mean GCSE points score" "Mean number of GCSEs studied"
+matrix rownames i = "Mean number of A*â€“C passes" "Mean number of A*â€“F passes" "Mean GCSE points score" "Mean number of GCSEs studied"
 
 * Round the values
 
@@ -575,9 +575,115 @@ est store a
 esttab a using "A:\YCS\github_ycs_subject_analysis\outputs\table9.rtf", ///
 	b(%9.2f) se(%9.2f) aic(%9.1f) bic(%9.1f) scalars("ll Log lik.") sfmt(%9.1f) pr2 ///
 	starlevels(* .10 ** .05 *** .01) stardetach 	///
-	label mtitles("Multnomial Logit") ///
+	label mtitles("Multinomial Logit") ///
 	wide staraux nogaps noparentheses replace
-				
+	
+* Change base category to compare middle attainment latent groups
+
+mlogit sample3_modal_class ///
+				i.t0cohort ///
+				ib2.t0sex ///
+				i.t0ethnic ///
+				i.t0house ///
+				i.t0stay ///
+				ib2.t0par_nssec2 ///
+					[pw=t1weight], base(2) 
+est store b
+
+esttab b using "C:\temp\github_ycs_subject_analysis\outputs\table9a.rtf", ///
+	b(%9.2f) se(%9.2f) aic(%9.1f) bic(%9.1f) scalars("ll Log lik.") sfmt(%9.1f) pr2 ///
+	starlevels(* .10 ** .05 *** .01) stardetach 	///
+	label mtitles("Multinomial Logit") ///
+	unstack wide staraux nogaps noparentheses replace
+
+***
+
+* Figure 1
+
+use $path3\ycs5_to_11_set5.dta, clear
+numlabel _all, rem
+
+* Check to make sure quasi-variance installed
+
+* ssc install qv
+
+* Check the numeric labels on the latent group variable
+
+numlabel _all, add
+tab sample3_modal_class, mi
+numlabel _all, rem
+
+***
+
+* Estimate 3 separate models to replicate the mlogit then export the matrices
+
+forvalues i = 1/3 {
+
+	* Estimate mlogit model
+
+	mlogit sample3_modal_class ///
+				i.t0cohort ///
+				ib2.t0sex ///
+				i.t0ethnic ///
+				i.t0house ///
+				i.t0stay ///
+				ib2.t0par_nssec2 ///
+					if sample3_modal_class==`i' | sample3_modal_class==4 ///
+						[pw=t1weight], base(4) 	
+
+	* These are the coefficients for the comparison group
+					
+	qv ib2.t0par_nssec2
+
+	* Matrix to save the results of the quasi-variances
+
+	mat lowerq`i'	=	e(qvlb)
+	mat upperq`i'	=	e(qvub)
+	svmat lowerq`i', names(lowerq`i')
+	svmat upperq`i', names(upperq`i')
+	gen BETAS`i'	=	(lowerq`i'+upperq`i')/2
+
+}
+
+***
+
+* Group (for social class variable)
+
+gen class1 = _n in 1/8
+gen class2 = class1 + 0.1
+gen class3 = class1 + 0.2
+
+* Graph this
+
+set scheme s1mono
+
+twoway ///
+(scatter BETAS1 class1, msymbol(smcircle) mlcolor(black) mfcolor(white)  msize(medium)) ///
+(scatter BETAS2 class2, msymbol(smdiamond) mlcolor(black) mfcolor(white)  msize(medium))  ///
+(scatter BETAS3 class3, msymbol(smsquare) mlcolor(black) mfcolor(white)  msize(medium))  ///
+(rspike upperq1 lowerq1 class1, blcolor(black) blwidth(medium)) ///
+(rspike upperq2 lowerq2 class2, blcolor(black) blwidth(medium)) ///
+(rspike upperq3 lowerq3 class3, blcolor(black) blwidth(medium)) ///
+, ///
+	title("Latent Educational Group Membership" "Parental Occupation (NS-SEC)", size(large) justification(center) ) ///
+	subtitle("Multinomial Logistic Regression Coefficients" "(With Quasi Variance Comparison Intervals)" " ", size(small) justification(center) ) ///
+	xlabel(1 "1.1" 2 "1.2" 3 "2" 4 "3" 5 "4" 6 "5" 7 "6" 8 "7") ///
+	xtitle("NS-SEC" "Parental Occupation") ///
+	ytitle("Coefficient") ///
+	yline(0) ///
+	legend(order(	1 "Poor Grades" ///
+					2 "Science" ///
+					3 "Non-Science" ) rows(1)) ///
+	note(	" " ///
+			"All pupils gaining a GCSE pass at grades A*-G, n=67,937, weighted data, YCS Cohorts 5-11." ///
+			" " ///
+			"Other variables includes in the model:" ///
+			"Year completed compulsory schooling, Gender, Ethnicity, Housing Tenure, Household Type")
+
+* Export the graph
+
+graph export "C:\temp\github_ycs_subject_analysis\outputs\lclass_nssec_mlogit.png", as(png) replace
+
 clear
 
 * END *
