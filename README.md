@@ -60,7 +60,7 @@ The files have been written in order and are intended to be run sequentially
 |  |  |
 | `README.md` | Readme file describing files |
 |  |  |
-| `ycs10_SOC2000.xlsx` | SOC2000 codes |
+| `ycs10_SOC2000.xlsx` | SOC2000 codes for YCS10 - see `3_ycs10_soc2000_recode.do` |
 | `ycs12_ycs13_no_subject_info_20161220_cp_v1.docx` | Explanation of lack of GCSE subject variables in YCS12 and 13 |
 | `ycs_background_variables.xlsx` | List of background variables in harmonised YCS5-11 dataset |
 | `ycs_gcse_subjects_variables.xlsx` | List of GCSE subject variables in harmonised YCS5-11 dataset |
