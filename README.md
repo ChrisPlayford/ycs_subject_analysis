@@ -33,13 +33,13 @@ The files have been written in order and are intended to be run sequentially
 | `2_ycs8_gsce_subjects.do` | YCS8: Recodes raw GCSE subject information into standard GCSE subjects  |
 | `2_ycs9_gsce_subjects.do` | YCS9: Recodes raw GCSE subject information into standard GCSE subjects  |
 |  |  |
-| `3_soc2000_labels.do` | Task |
-| `3_ycs10_background_vars.do` | Task |
-| `3_ycs10_background_vars_check.do` | Task |
-| `3_ycs10_soc2000_recode.do` | Task |
-| `3_ycs11_background_vars.do` | Task |
-| `3_ycs5_789_background_vars.do` | Task |
-| `3_ycs6_background_vars.do` | Task |
+| `3_soc2000_labels.do` | Defines the labels for SOC2000 occupation codes |
+| `3_ycs10_background_vars.do` | Harmonises YCS10 variables with standard variable naming convention (as per UKDS SN5765) |
+| `3_ycs10_background_vars_check.do` | Validation of harmonised Variables from YCS10 with SN5765 |
+| `3_ycs10_soc2000_recode.do` | Converts SOC2000 codes in YCS10 into standard SOC2000 codes |
+| `3_ycs11_background_vars.do` | Harmonises YCS11 variables with standard variable naming convention (as per UKDS SN5765) |
+| `3_ycs5_789_background_vars.do` | Collates a subset of standardised variables from YCS5, 7, 8, and 9 into a dataset |
+| `3_ycs6_background_vars.do` | Harmonises YCS6 variables with standard variable naming convention (as per UKDS SN5765) |
 |  |  |
 | `4_inspection_background_vars_datasets.do` | Task |
 | `4_inspection_gcse_subjects_datasets.do` | Task |
