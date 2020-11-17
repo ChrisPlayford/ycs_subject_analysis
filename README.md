@@ -4,7 +4,7 @@ Collaborators:
 
 Christopher Playford, University of Exeter  
 Vernon Gayle, University of Edinburgh  
-Roxanne Connelly, University of York  
+Roxanne Connelly, University of Edinburgh  
 
 Funder: This work was supported by the ESRC under Grant ES/R004978/1.
 
