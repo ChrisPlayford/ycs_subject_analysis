@@ -25,13 +25,13 @@ The files have been written in order and are intended to be run sequentially
 | --- | --- |
 | `1_ycs_datasets_file_paths.do` | Sets file paths |
 |  |  |
-| `2_ycs10_gsce_subjects.do` | YCS10: Recodes raw GCSE subject information into standard GCSE subjects  |
-| `2_ycs11_gsce_subjects.do` | YCS11: Recodes raw GCSE subject information into standard GCSE subjects  |
 | `2_ycs5_gsce_subjects.do` | YCS5: Recodes raw GCSE subject information into standard GCSE subjects |
 | `2_ycs6_gsce_subjects.do` | YCS6: Recodes raw GCSE subject information into standard GCSE subjects  |
 | `2_ycs7_gsce_subjects.do` | YCS7: Recodes raw GCSE subject information into standard GCSE subjects  |
 | `2_ycs8_gsce_subjects.do` | YCS8: Recodes raw GCSE subject information into standard GCSE subjects  |
 | `2_ycs9_gsce_subjects.do` | YCS9: Recodes raw GCSE subject information into standard GCSE subjects  |
+| `2_ycs10_gsce_subjects.do` | YCS10: Recodes raw GCSE subject information into standard GCSE subjects  |
+| `2_ycs11_gsce_subjects.do` | YCS11: Recodes raw GCSE subject information into standard GCSE subjects  |
 |  |  |
 | `3_soc2000_labels.do` | Defines the labels for SOC2000 occupation codes |
 | `3_ycs10_background_vars.do` | Harmonises YCS10 variables with standard variable naming convention (as per UKDS SN5765) |
@@ -47,7 +47,6 @@ The files have been written in order and are intended to be run sequentially
 | `4_ycs5_11_link_class_variables.do` | Links social class information from CAMSIS website |
 | `4_ycs5_11_recoding_preparation.do` | Constructs further derived variables including GCSE subject groupings, parental social class measures and identifies analytical samples |
 |  |  |
-| `5_ycs5_11_file10_agglomerate_models_efa.do` | Estimation of agglomerate GCSE attainment models and factor analysis |
 | `5_ycs5_11_file1_exploratory_lca.do` | Exploratory latent class models |
 | `5_ycs5_11_file2_assignment.do` | Sensitivity analysis using foreign language GCSE grouping |
 | `5_ycs5_11_file3_exploratory_mlogit.do` | Exploratory mlogit model predicting latent group membership using modal assignment |
@@ -57,6 +56,7 @@ The files have been written in order and are intended to be run sequentially
 | `5_ycs5_11_file7_post_qstep_charts.do` | Additional charts following Q-step presentation Edinburgh 2017 |
 | `5_ycs5_11_file8_sensitivity_analysis.do` | Verification using new GSEM package in Stata and reptition of factor analysis |
 | `5_ycs5_11_file9_gsem.do` | Sensitivity analysis: LCA using proportional assignment and one-step LCA using GSEM |
+| `5_ycs5_11_file10_agglomerate_models_efa.do` | Estimation of agglomerate GCSE attainment models and factor analysis |
 |  |  |
 | `README.md` | Readme file describing files |
 |  |  |
