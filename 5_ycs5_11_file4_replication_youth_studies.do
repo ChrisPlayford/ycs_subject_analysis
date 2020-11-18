@@ -5,19 +5,19 @@
 
 * Replication of YCS6 work using YCS5-YCS11
 
- global path5 "A:\data\YCS_Cohort_5_Download\stata8\"
- global path6 "A:\data\YCS_Cohort_6_Download\stata8\"
- global path7 "A:\data\YCS_Cohort_7_Download\stata8\"
- global path8 "A:\data\YCS_Cohort_8_Download\stata8\"
- global path9 "A:\data\YCS_Cohort_9_Download\stata8\"
-global path10 "A:\data\YCS_Cohort_10_Download\stata8_se\"
-global path11 "A:\data\YCS_Cohort_11_Download\stata8_se\"
-global path12 "A:\data\YCS_Cohort_12_Download\stata8\"
-global path13 "A:\data\YCS_Cohort_13_Download\stata9\"
+global path5 "C:\temp\github_ycs_subject_analysis\raw_data\YCS_Cohort_5_Download\stata8\"
+ global path6 "C:\temp\github_ycs_subject_analysis\raw_data\YCS_Cohort_6_Download\stata8\"
+ global path7 "C:\temp\github_ycs_subject_analysis\raw_data\YCS_Cohort_7_Download\stata8\"
+ global path8 "C:\temp\github_ycs_subject_analysis\raw_data\YCS_Cohort_8_Download\stata8\"
+ global path9 "C:\temp\github_ycs_subject_analysis\raw_data\YCS_Cohort_9_Download\stata8\"
+global path10 "C:\temp\github_ycs_subject_analysis\raw_data\YCS_Cohort_10_Download\stata8_se\"
+global path11 "C:\temp\github_ycs_subject_analysis\raw_data\YCS_Cohort_11_Download\stata8_se\"
+global path12 "C:\temp\github_ycs_subject_analysis\raw_data\YCS_Cohort_12_Download\stata8\"
+global path13 "C:\temp\github_ycs_subject_analysis\raw_data\YCS_Cohort_13_Download\stata9\"
 
- global path2 "A:\YCS\github_ycs_subject_analysis\"
- global path3 "A:\YCS\github_ycs_subject_analysis\data\"
- global path4 "A:\data\YCS_time_series\stata8\"
+ global path2 "C:\temp\github_ycs_subject_analysis\"
+ global path3 "C:\temp\github_ycs_subject_analysis\data\"
+ global path4 "C:\temp\github_ycs_subject_analysis\raw_data\YCS_time_series\stata8\"
 
 clear
 set more off
@@ -665,10 +665,10 @@ twoway ///
 (rspike upperq2 lowerq2 class2, blcolor(black) blwidth(medium)) ///
 (rspike upperq3 lowerq3 class3, blcolor(black) blwidth(medium)) ///
 , ///
-	title("Latent Educational Group Membership" "Parental Occupation (NS-SEC)", size(large) justification(center) ) ///
+	title("Latent Educational Group Membership" "Parental Social Class (NS-SEC)", size(large) justification(center) ) ///
 	subtitle("Multinomial Logistic Regression Coefficients" "(With Quasi Variance Comparison Intervals)" " ", size(small) justification(center) ) ///
 	xlabel(1 "1.1" 2 "1.2" 3 "2" 4 "3" 5 "4" 6 "5" 7 "6" 8 "7") ///
-	xtitle("NS-SEC" "Parental Occupation") ///
+	xtitle("NS-SEC" "Parental Social Class") ///
 	ytitle("Coefficient") ///
 	yline(0) ///
 	legend(order(	1 "Poor Grades" ///
@@ -683,6 +683,8 @@ twoway ///
 * Export the graph
 
 graph export "C:\temp\github_ycs_subject_analysis\outputs\lclass_nssec_mlogit.png", as(png) replace
+
+graph export "C:\temp\github_ycs_subject_analysis\outputs\lclass_nssec_mlogit.eps", as(eps) replace
 
 clear
 
