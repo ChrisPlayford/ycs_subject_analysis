@@ -54,7 +54,7 @@ The files have been written in order and are intended to be run sequentially
 | `5_ycs5_11_file5_exploratory_lca.do` | Testing for measurement invariance (LCA on separate cohorts) |
 | `5_ycs5_11_file6_qstep_charts.do` | Charts for Q-step presentation Edinburgh 2017 |
 | `5_ycs5_11_file7_post_qstep_charts.do` | Additional charts following Q-step presentation Edinburgh 2017 |
-| `5_ycs5_11_file8_sensitivity_analysis.do` | Verification using new GSEM package in Stata and reptition of factor analysis |
+| `5_ycs5_11_file8_sensitivity_analysis.do` | Verification using new GSEM package in Stata and repetition of factor analysis |
 | `5_ycs5_11_file9_gsem.do` | Sensitivity analysis: LCA using proportional assignment and one-step LCA using GSEM |
 | `5_ycs5_11_file10_agglomerate_models_efa.do` | Estimation of agglomerate GCSE attainment models and factor analysis |
 |  |  |
