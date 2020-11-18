@@ -337,4 +337,15 @@ NEXT STEPS:
 * Fitted factor analysis
 * Exported results to include in paper
 
+***
+
+18th November 2020
+
+* Wrote two Jupyter notebooks showing the tables and figures reported in the paper and the online-only supplement.
+
+ycs_lca_paper_20201117_cp_v1.ipynb
+ycs_lca_supplement_20201117_cp_v1.ipynb
+
+
+
 * END *
