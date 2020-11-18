@@ -64,5 +64,9 @@ The files have been written in order and are intended to be run sequentially
 | `ycs12_ycs13_no_subject_info_20161220_cp_v1.docx` | Explanation of lack of GCSE subject variables in YCS12 and 13 |
 | `ycs_background_variables.xlsx` | List of background variables in harmonised YCS5-11 dataset |
 | `ycs_gcse_subjects_variables.xlsx` | List of GCSE subject variables in harmonised YCS5-11 dataset |
+|  |  |
+| `ycs_lca_paper_20201117_cp_v1.ipynb` | Main paper tables and figures - Jupyter Notebook |
+| `ycs_lca_supplement_20201117_cp_v1.ipynb` | Supplement tables and figures - Jupyter Notebook |
+|  |  |
 | `ycs_subject_analysis_plan.txt` | Diary of analytical tasks performed |
 | `youth_studies_replication_ycs5_11_20170202_cp_v1.docx` | Output replicating Youth Studies paper (Playford and Gayle 2016) |
