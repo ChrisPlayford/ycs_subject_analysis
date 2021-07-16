@@ -678,7 +678,7 @@ twoway ///
 			"All pupils gaining a GCSE pass at grades A*-G, n=67,937, weighted data, YCS Cohorts 5-11." ///
 			" " ///
 			"Other variables includes in the model:" ///
-			"Year completed compulsory schooling, Gender, Ethnicity, Housing Tenure, Household Type")
+			"Year completed compulsory schooling, Gender, Ethnicity, Housing Tenure, Household Type", size(vsmall) )
 
 * Export the graph
 
